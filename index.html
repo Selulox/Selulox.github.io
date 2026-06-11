@@ -36,7 +36,7 @@
 
   <!-- NAV -->
   <nav>
-    <span class="nav-item" onclick="showPage('portfolio', this)">Portfolio</span>
+    <span class="nav-item" onclick="showPage('games', this)">Games</span>
     <span class="nav-item" onclick="showPage('designs', this)">Designs</span>
     <span class="nav-item active" onclick="showPage('home', this)">Home</span>
     <span class="nav-item" onclick="showPage('resume', this)">Resume</span>
@@ -49,7 +49,7 @@
     <div class="home-intro">
       <h1>Hey there!</h1>
       <p>And welcome to my little slice of the interwebs. I'm <strong>Oktay Sırmaçekici</strong> and as you've probably guessed from the title of this website, I'm a huge game design and programming enthusiast. In my spare time you'll frequently find me tinkering with games on different genres and platforms, figuring out new and interesting ways of doing things, and get the creative juices flowing with the development of small games. I enjoy working with people that share similar passions so feel free to <a href="#" onclick="showPage('about', document.querySelectorAll('.nav-item')[4]); setTimeout(()=>document.getElementById('about-section').scrollIntoView({behavior:'smooth'}),50)">get in touch</a> with me if I can be of some help.</p>
-      <p>Below you'll find some of my (more experimental) projects I've been working on lately. You can find more detailed descriptions of several of my projects at the <a href="#" onclick="showPage('portfolio', document.querySelectorAll('.nav-item')[0]); setTimeout(()=>document.getElementById('portfolio-section').scrollIntoView({behavior:'smooth'}),50)">portfolio</a> page.</p>
+      <p>Below you'll find some of my (more experimental) projects I've been working on lately. You can find more detailed descriptions of several of my projects at the <a href="#" onclick="showPage('games', document.querySelectorAll('.nav-item')[0]); setTimeout(()=>document.getElementById('games-section').scrollIntoView({behavior:'smooth'}),50)">games</a> page.</p>
     </div>
 
     <p class="home-contact-note">In case this site didn't answer all your questions or you'd simply like to contact me, hop over to the <a href="#" onclick="showPage('about', document.querySelectorAll('.nav-item')[4]); setTimeout(()=>document.getElementById('about-section').scrollIntoView({behavior:'smooth'}),50)">contact section</a> and send me a message!</p>
@@ -62,8 +62,8 @@
 
   </div>
 
-  <!--  PORTFOLIO  -->
-  <div id="page-portfolio" class="page">
+  <!--  GAMES  -->
+  <div id="page-games" class="page">
 
     <p class="portfolio-note">These are all spare time projects; click on any of the portfolio items for more details.</p>
 
@@ -198,7 +198,7 @@
 <div id="project-detail">
   <div class="pd-inner">
 
-    <button class="pd-back" onclick="closeDetail()">← Back to Portfolio</button>
+    <button class="pd-back" onclick="closeDetail()">← Back to Games</button>
 
     <div class="pd-header">
       <h1 id="pd-title">Project Title</h1>
