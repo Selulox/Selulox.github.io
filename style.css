@@ -337,7 +337,6 @@ nav {
 /* Freeform content */
 .pd-content { }
 
-/* First image: full width hero, no text beside it */
 .pd-block-hero {
   width: 100%;
   margin-bottom: 28px;
@@ -350,7 +349,6 @@ nav {
   image-rendering: crisp-edges;
 }
 
-/* Standard row: image left (2/3), text right (1/3) */
 .pd-block-row {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -359,7 +357,6 @@ nav {
   margin-bottom: 32px;
 }
 
-/* Double-image row: two images on left (2/3), text on right (1/3) */
 .pd-block-row-duo {
   display: grid;
   grid-template-columns: 1fr 1fr 0.7fr;
