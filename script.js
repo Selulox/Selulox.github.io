@@ -7,22 +7,42 @@ function showPage(id, el) {
   window.scrollTo(0, 0);
 }
 
-// Project data 
-// HOW TO ADD IMAGES:
-//   1. Put your image files in the same folder as this HTML (e.g. images/project1-1.jpg)
-//   2. Replace the empty src: '' with the relative path, e.g. src: 'images/project1-1.jpg'
 const projects =
 {
   'project-1': {
-    title: 'Project One',
-    link: 'https://itch.io/',
+    title: 'DATAMON',
+    link: 'https://eggzodiac.itch.io/datamon',
     content: [
-      { type: 'image', src: '' },   // e.g. 'images/project1-screen1.jpg'
-      { type: 'text',  body: 'Describe what is happening in the screenshot above. Walk the reader through the mechanic, level, or system on display.' },
-      { type: 'image', src: '' },
-      { type: 'text',  body: 'Another screenshot, another moment. Keep building the picture of how the game works and what you contributed.' },
-      { type: 'image', src: '' },
-      { type: 'text',  body: 'Final thought — what did you learn, what would you do differently, what are you proud of?' },
+      { type: 'hero', src: 'images/Projects/DATAMON/datamon_wallp.jpg', text: 'Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.' },
+
+      { type: 'duo',
+        srcLeft: 'images/Projects/DATAMON/battle.jpg',
+        src: 'images/Projects/DATAMON/battle_move.jpg',
+        text: 'This is a battle scene with a Pokémon in action.' 
+      },
+
+      { type: 'row',
+        src: 'images/Projects/DATAMON/move1.jpg',
+        text: 'Each Pokémon has a set of moves. The left panel shows the move list; the right shows it in action during battle.' },
+
+      { type: 'duo',
+        srcLeft: 'images/Projects/DATAMON/pokemon.jpg',
+        src: 'images/Projects/DATAMON/part.jpg',
+        text: 'Manage your party between battles. Swap members, check stats, and plan your team composition.' },
+
+      { type: 'duo',
+        srcLeft: 'images/Projects/DATAMON/shopstock.jpg',
+        src: 'images/Projects/DATAMON/shop_list.jpg',
+        text: 'The shop lets you stock up on items. Stock view on the left, the purchase list on the right.' },
+
+      { type: 'row',
+        src: 'images/Projects/DATAMON/inventory.jpg',
+        text: 'Your inventory keeps track of everything you carry — potions, balls, and key items.' },
+
+      { type: 'duo',
+        srcLeft: 'images/Projects/DATAMON/routes1.jpg',
+        src:     'images/Projects/DATAMON/route.jpg',
+        text:    'Routes connect towns and are filled with wild encounters. Each route has its own Pokémon pool and difficulty curve.' },
     ]
   },
   'project-2': {
@@ -63,7 +83,53 @@ document.querySelectorAll('.proj-play-icon[data-project]').forEach(a => {
   if (p) a.href = p.link;
 });
 
-// Project detail overlay 
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+let _lbImages = [];   // flat array of src strings for current project
+let _lbIndex  = 0;
+
+function openLightbox(srcs, startIndex) {
+  _lbImages = srcs;
+  _lbIndex  = startIndex;
+  _renderLightbox();
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+function lbPrev() {
+  _lbIndex = (_lbIndex - 1 + _lbImages.length) % _lbImages.length;
+  _renderLightbox();
+}
+
+function lbNext() {
+  _lbIndex = (_lbIndex + 1) % _lbImages.length;
+  _renderLightbox();
+}
+
+function _renderLightbox() {
+  const img = document.getElementById('lb-img');
+  const counter = document.getElementById('lb-counter');
+  img.src = _lbImages[_lbIndex];
+  counter.textContent = (_lbIndex + 1) + ' / ' + _lbImages.length;
+  // hide arrows if only one image
+  document.getElementById('lb-prev').style.display = _lbImages.length > 1 ? '' : 'none';
+  document.getElementById('lb-next').style.display = _lbImages.length > 1 ? '' : 'none';
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('active')) {
+    if (e.key === 'Escape') closeDetail();
+    return;
+  }
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  lbPrev();
+  if (e.key === 'ArrowRight') lbNext();
+});
+
+// ── Project detail overlay ───────────────────────────────────────────────────
 function openDetail(id) {
   const p = projects[id];
   if (!p) return;
@@ -71,16 +137,52 @@ function openDetail(id) {
   document.getElementById('pd-link').href = p.link;
 
   const container = document.getElementById('pd-content');
-  container.innerHTML = p.content.map(block => 
-  {
-    if (block.type === 'image') 
-    {
+
+  // Collect all real image srcs in order for the lightbox gallery
+  const allSrcs = [];
+  p.content.forEach(block => {
+    if (block.type === 'hero'  && block.src)     allSrcs.push(block.src);
+    if (block.type === 'row'   && block.src)     allSrcs.push(block.src);
+    if (block.type === 'duo') {
+      if (block.srcLeft) allSrcs.push(block.srcLeft);
+      if (block.src)     allSrcs.push(block.src);
+    }
+    if (block.type === 'image' && block.src)     allSrcs.push(block.src);
+  });
+
+  // Helper: clickable img tag — clicking opens lightbox at correct index
+  function imgTag(src, srcList) {
+    if (!src) return `<div class="pd-image-placeholder" style="aspect-ratio:16/9"></div>`;
+    const idx = srcList.indexOf(src);
+    return `<img src="${src}" alt="" class="lb-trigger" onclick="openLightbox(${JSON.stringify(srcList)}, ${idx})" title="Click to enlarge">`;
+  }
+
+  container.innerHTML = p.content.map(block => {
+    if (block.type === 'hero') {
+      return `<div class="pd-block-hero">${imgTag(block.src, allSrcs)}</div>`;
+    }
+    else if (block.type === 'row') {
+      return `
+        <div class="pd-block-row">
+          <div class="pd-block-img">${imgTag(block.src, allSrcs)}</div>
+          <div class="pd-block-text"><p>${block.text}</p></div>
+        </div>`;
+    }
+    else if (block.type === 'duo') {
+      // Layout: image left, image centre, text right (3 columns: 1fr 1fr 0.8fr)
+      return `
+        <div class="pd-block-row-duo">
+          <div class="pd-block-img">${imgTag(block.srcLeft, allSrcs)}</div>
+          <div class="pd-block-img">${imgTag(block.src, allSrcs)}</div>
+          <div class="pd-block-text"><p>${block.text}</p></div>
+        </div>`;
+    }
+    else if (block.type === 'image') {
       return block.src
-        ? `<div class="pd-image"><img src="${block.src}" alt=""></div>`
+        ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>`
         : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`;
-    } 
-    else 
-    {
+    }
+    else {
       return `<p>${block.body}</p>`;
     }
   }).join('');
@@ -94,14 +196,7 @@ function closeDetail() {
   document.getElementById('project-detail').classList.remove('active');
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
-
 // Thumbnail grid 
-// HOW TO USE REAL IMAGES:
-//   Replace the placeholder div generation below with:
-//   const img = document.createElement('img');
-//   img.src = 'images/thumb-01.jpg';   // one per thumbnail
-//   a.appendChild(img);
 const grid = document.getElementById('thumb-grid');
 for (let i = 0; i < 25; i++) {
   const a = document.createElement('a');
