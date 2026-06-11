@@ -13,7 +13,7 @@ const projects =
     title: 'DATAMON',
     link: 'https://eggzodiac.itch.io/datamon',
     content: [
-      { type: 'hero', src: 'images/Projects/DATAMON/datamon_wallp.jpg'},
+      { type: 'hero', src: 'images/Projects/DATAMON/datamon_wallp.jpg', text: 'Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.' },
 
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/battle.jpg',
@@ -83,8 +83,8 @@ document.querySelectorAll('.proj-play-icon[data-project]').forEach(a => {
   if (p) a.href = p.link;
 });
 
-// Lightbox 
-let _lbImages = []; 
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+let _lbImages = [];   // flat array of src strings for current project
 let _lbIndex  = 0;
 
 function openLightbox(srcs, startIndex) {
@@ -129,7 +129,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNext();
 });
 
-// Project detail overlay
+// ── Project detail overlay ───────────────────────────────────────────────────
 function openDetail(id) {
   const p = projects[id];
   if (!p) return;
@@ -150,11 +150,12 @@ function openDetail(id) {
     if (block.type === 'image' && block.src)     allSrcs.push(block.src);
   });
 
-  // Helper: clickable img tag with lightbox integration
+  // Helper: clickable img tag — clicking opens lightbox at correct index
   function imgTag(src, srcList) {
     if (!src) return `<div class="pd-image-placeholder" style="aspect-ratio:16/9"></div>`;
     const idx = srcList.indexOf(src);
-    return `<img src="${src}" alt="" class="lb-trigger" onclick="openLightbox(${JSON.stringify(srcList)}, ${idx})" title="Click to enlarge">`;
+    const safeJson = JSON.stringify(srcList).replace(/'/g, "&#39;");
+    return `<img src="${src}" alt="" class="lb-trigger" data-srcs='${safeJson}' data-idx="${idx}" title="Click to enlarge">`;
   }
 
   container.innerHTML = p.content.map(block => {
@@ -169,6 +170,7 @@ function openDetail(id) {
         </div>`;
     }
     else if (block.type === 'duo') {
+      // Layout: image left, image centre, text right (3 columns: 1fr 1fr 0.8fr)
       return `
         <div class="pd-block-row-duo">
           <div class="pd-block-img">${imgTag(block.srcLeft, allSrcs)}</div>
@@ -177,12 +179,23 @@ function openDetail(id) {
         </div>`;
     }
     else if (block.type === 'image') {
-      return block.src ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>` : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`;
+      return block.src
+        ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>`
+        : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`;
     }
     else {
       return `<p>${block.body}</p>`;
     }
   }).join('');
+
+  // Wire lightbox clicks via event delegation (avoids inline onclick quote issues)
+  container.querySelectorAll('.lb-trigger').forEach(img => {
+    img.addEventListener('click', () => {
+      const srcs = JSON.parse(img.dataset.srcs);
+      const idx  = parseInt(img.dataset.idx, 10);
+      openLightbox(srcs, idx);
+    });
+  });
 
   const el = document.getElementById('project-detail');
   el.classList.add('active');
