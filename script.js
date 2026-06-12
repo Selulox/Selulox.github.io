@@ -46,20 +46,20 @@ const projects =
     ]
   },
   'project-2': {
-    title: 'Project Two',
-    link: 'https://itch.io/',
+    title: 'STARGAZE',
+    link: 'https://eggzodiac.itch.io/stargaze',
     content: [
-      { type: 'image', src: '' },
+      { type: 'image', src: 'images/Projects/STARGAZE/main_wallpaper_star.jpg' },
       { type: 'text',  body: 'Describe what is happening in the screenshot above.' },
       { type: 'image', src: '' },
       { type: 'text',  body: 'Continue the breakdown of the project here.' },
     ]
   },
   'project-3': {
-    title: 'Project Three',
-    link: 'https://itch.io/',
+    title: 'KING\'S SECRET',
+    link: 'https://eggzodiac.itch.io/kings-secret',
     content: [
-      { type: 'image', src: '' },
+      { type: 'image', src: 'images/Projects/KINGS_SECRET/kıngs_secret.png' },
       { type: 'text',  body: 'Describe what is happening in the screenshot above.' },
       { type: 'image', src: '' },
       { type: 'text',  body: 'Continue the breakdown of the project here.' },
