@@ -223,30 +223,35 @@ function closeDetail() {
   document.getElementById('project-detail').classList.remove('active');
 }
 
+// Thumbnail grid, Design page
 const designs = [
-  { src: 'images/Design/Gun_model.jpg', href: '#' },
-  { src: 'images/Design/hayalet.png', href: '#' },
-  { src: 'images/Design/Bendable_model.gif', href: '#' },
-  { src: 'images/Design/KEYDOT2.png', href: '#' },
-  { src: 'images/Design/hppotion.png', href: '#' },
-  { src: 'images/Design/vampire.png', href: '#' },
-  { src: 'images/Design/sword.png', href: '#' },
-  { src: 'images/Design/off hand - book.png', href: '#' },
-  { src: 'images/Design/base_planet_1.png', href: '#' },
-  { src: 'images/Design/base_planet_2.png', href: '#' },
-  { src: 'images/Design/base_background_combo.png', href: '#' },
-  { src: 'images/Design/fight bar.png', href: '#' },
-  { src: 'images/Design/scrolldeneme.png', href: '#' },
-  { src: 'images/Design/empty hand.png', href: '#' },
-
+  'images/Design/base_background_combo.png',
+  'images/Design/base_planet_1.png',
+  'images/Design/base_planet_2.png',
+  'images/Design/Bendable_model.gif',
+  'images/Design/empty hand.png',
+  'images/Design/fight bar.png',
+  'images/Design/Gun_model.jpg',
+  'images/Design/hayalet.png',
+  'images/Design/hppotion.png',
+  'images/Design/KEYDOT2.png',
+  'images/Design/off hand - book.png',
+  'images/Design/scrolldeneme.png',
+  'images/Design/sword.png',
+  'images/Design/vampire.png',
+  'images/Design/torch.png',
 ];
 
 const grid = document.getElementById('thumb-grid');
-designs.forEach(item => {
+designs.forEach((src, i) => {
   const a = document.createElement('a');
-  a.href = item.href;
+  a.href = '#';
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    openLightbox(designs, i);
+  });
   const img = document.createElement('img');
-  img.src = item.src;
+  img.src = src;
   img.alt = '';
   a.appendChild(img);
   grid.appendChild(a);
@@ -258,16 +263,16 @@ designs.forEach(item => {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const H = 32;
+  const H  = 32;
   const CY = H / 2;
-  const R = 7;
+  const R  = 7;
   const GR = 6;
   const SPEED = 1.6;
 
-  const COL = '#F0EAD6';
+  const COL  = '#F0EAD6';
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
-  const CDOT = '#F0EAD6';
+  const CDOT = '#2A3D52';
 
   let W = canvas.offsetWidth || 760;
   canvas.width  = W;
@@ -281,10 +286,10 @@ designs.forEach(item => {
   }
   makeDots();
 
-  let dir = 1; // 1=right, -1=left
-  let pacX = -R * 3;
+  let dir    = 1;      // 1=right, -1=left
+  let pacX   = -R * 3;
   let ghostX = pacX - GR * 4;
-  let mouthT = 0; // 0=closed, 1=open
+  let mouthT = 0;      // 0=closed, 1=open
   let mouthD = 1;
 
   function drawPac(x, t, d) {
@@ -303,15 +308,15 @@ designs.forEach(item => {
   }
 
   function drawGhost(x) {
-    const t = CY - GR;
-    const b = CY + GR;
+    const t  = CY - GR;
+    const b  = CY + GR;
     const bm = GR * 0.4;
     ctx.beginPath();
     ctx.arc(x, t + GR * 0.6, GR, Math.PI, 0, false);
     ctx.lineTo(x + GR, b);
     ctx.quadraticCurveTo(x + GR * 0.67, b + bm, x + GR * 0.33, b);
-    ctx.quadraticCurveTo(x, b - bm,  x - GR * 0.33, b);
-    ctx.quadraticCurveTo(x - GR * 0.67, b + bm,  x - GR, b);
+    ctx.quadraticCurveTo(x,             b - bm,  x - GR * 0.33, b);
+    ctx.quadraticCurveTo(x - GR * 0.67, b + bm,  x - GR,        b);
     ctx.lineTo(x - GR, t + GR * 0.6);
     ctx.closePath();
     ctx.fillStyle = COL;
@@ -381,13 +386,13 @@ designs.forEach(item => {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const SIZE = 190; // canvas px
-  const CX = SIZE / 2;
-  const CY = SIZE / 2;
-  const ORBIT  = 87; // orbit radius (just outside the 150px photo)
-  const R = 7; // pacman radius
-  const GR = 6; // ghost radius
-  const SPEED  = 0.022; // radians per frame at 60fps
+  const SIZE   = 190;          // canvas px
+  const CX     = SIZE / 2;
+  const CY     = SIZE / 2;
+  const ORBIT  = 87;           // orbit radius (just outside the 150px photo)
+  const R      = 7;            // pacman radius
+  const GR     = 6;            // ghost radius
+  const SPEED  = 0.022;        // radians per frame at 60fps
 
   canvas.width  = SIZE;
   canvas.height = SIZE;
@@ -395,7 +400,7 @@ designs.forEach(item => {
   const COL  = '#F0EAD6';
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
-  const CDOT = '#F0EAD6';
+  const CDOT = '#2A3D52';
 
   // dots evenly around the orbit
   const DOT_COUNT = 28;
@@ -431,7 +436,7 @@ designs.forEach(item => {
   function drawGhost(a) {
     const x = CX + Math.cos(a) * ORBIT;
     const y = CY + Math.sin(a) * ORBIT;
-    const b = GR;
+    const b  = GR;
     const bm = GR * 0.4;
 
     ctx.save();
@@ -440,16 +445,16 @@ designs.forEach(item => {
     ctx.arc(0, GR * 0.6, GR, Math.PI, 0, false);
     ctx.lineTo(GR, b * 2);
     ctx.quadraticCurveTo( GR * 0.67, b * 2 + bm,  GR * 0.33, b * 2);
-    ctx.quadraticCurveTo( 0, b * 2 - bm, -GR * 0.33, b * 2);
-    ctx.quadraticCurveTo(-GR * 0.67, b * 2 + bm, -GR, b * 2);
+    ctx.quadraticCurveTo( 0,         b * 2 - bm, -GR * 0.33, b * 2);
+    ctx.quadraticCurveTo(-GR * 0.67, b * 2 + bm, -GR,        b * 2);
     ctx.lineTo(-GR, GR * 0.6);
     ctx.closePath();
     ctx.fillStyle = COL;
     ctx.fill();
 
-    // eyes
+    // eyes — pupils look forward (clockwise along orbit)
     const ey = GR * 0.4;
-    const ps = 1.2; // shift right
+    const ps = 1.2; // shift right = forward in local space
     [-GR * 0.35, GR * 0.35].forEach(ox => {
       ctx.beginPath();
       ctx.ellipse(ox, ey, GR * 0.28, GR * 0.32, 0, 0, Math.PI * 2);
@@ -496,7 +501,7 @@ designs.forEach(item => {
 
     drawPac(angle, mouthT);
 
-    angle += step;
+    angle  += step;
     gAngle += step;
 
     requestAnimationFrame(frame);
