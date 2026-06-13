@@ -235,3 +235,256 @@ for (let i = 0; i < 25; i++) {
   a.appendChild(d);
   grid.appendChild(a);
 }
+
+// Pacman animation
+(function() {
+  const canvas = document.getElementById('pacman-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const H = 32;
+  const CY = H / 2;
+  const R = 7;
+  const GR = 6;
+  const SPEED = 1.6;
+
+  const COL = '#F0EAD6';
+  const CEYE = '#8A9BB0';
+  const CPUP = '#0D1B2A';
+  const CDOT = '#F0EAD6';
+
+  let W = canvas.offsetWidth || 760;
+  canvas.width  = W;
+  canvas.height = H;
+
+  // dots
+  let dots = [];
+  function makeDots() {
+    dots = [];
+    for (let x = 14; x < W - 14; x += 16) dots.push({ x, eaten: false });
+  }
+  makeDots();
+
+  let dir = 1; // 1=right, -1=left
+  let pacX = -R * 3;
+  let ghostX = pacX - GR * 4;
+  let mouthT = 0; // 0=closed, 1=open
+  let mouthD = 1;
+
+  function drawPac(x, t, d) {
+    // draw a filled circle then cut the mouth wedge out
+    const angle = t * Math.PI / 3; // 0 to 60 degrees
+    ctx.save();
+    ctx.translate(x, CY);
+    if (d === -1) ctx.scale(-1, 1); // flip for left direction
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, R, angle, 2 * Math.PI - angle, false);
+    ctx.closePath();
+    ctx.fillStyle = COL;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawGhost(x) {
+    const t = CY - GR;
+    const b = CY + GR;
+    const bm = GR * 0.4;
+    ctx.beginPath();
+    ctx.arc(x, t + GR * 0.6, GR, Math.PI, 0, false);
+    ctx.lineTo(x + GR, b);
+    ctx.quadraticCurveTo(x + GR * 0.67, b + bm, x + GR * 0.33, b);
+    ctx.quadraticCurveTo(x, b - bm,  x - GR * 0.33, b);
+    ctx.quadraticCurveTo(x - GR * 0.67, b + bm,  x - GR, b);
+    ctx.lineTo(x - GR, t + GR * 0.6);
+    ctx.closePath();
+    ctx.fillStyle = COL;
+    ctx.fill();
+    // eyes
+    const ey = CY - GR * 0.2;
+    const ps = dir * 1.5;
+    [-GR * 0.35, GR * 0.35].forEach(ox => {
+      ctx.beginPath();
+      ctx.ellipse(x + ox, ey, GR * 0.28, GR * 0.32, 0, 0, Math.PI * 2);
+      ctx.fillStyle = CEYE; ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(x + ox + ps, ey, GR * 0.12, GR * 0.14, 0, 0, Math.PI * 2);
+      ctx.fillStyle = CPUP; ctx.fill();
+    });
+  }
+
+  let last = null;
+  function frame(ts) {
+    // cap delta so tab-switch doesn't cause a huge jump
+    const dt = last === null ? 16 : Math.min(ts - last, 50);
+    last = ts;
+    const step = SPEED * dt / 16;
+
+    W = canvas.offsetWidth || W;
+    if (canvas.width !== W) { canvas.width = W; makeDots(); }
+
+    ctx.clearRect(0, 0, W, H);
+
+    dots.forEach(d => {
+      if (!d.eaten) {
+        ctx.beginPath();
+        ctx.arc(d.x, CY, 2, 0, Math.PI * 2);
+        ctx.fillStyle = CDOT;
+        ctx.fill();
+      }
+      if (!d.eaten && Math.abs(d.x - pacX) < R) d.eaten = true;
+    });
+
+    mouthT += 0.09 * mouthD * (dt / 16);
+    if (mouthT >= 1) { mouthT = 1; mouthD = -1; }
+    if (mouthT <= 0) { mouthT = 0; mouthD =  1; }
+
+    drawGhost(ghostX);
+    drawPac(pacX, mouthT, dir);
+
+    pacX   += step * dir;
+    ghostX += step * dir;
+
+    if (dir === 1 && pacX > W + R * 3) {
+      dir = -1; pacX = W + R * 3; ghostX = pacX + GR * 4;
+      dots.forEach(d => d.eaten = false);
+    } else if (dir === -1 && pacX < -R * 3) {
+      dir = 1; pacX = -R * 3; ghostX = pacX - GR * 4;
+      dots.forEach(d => d.eaten = false);
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+
+// Orbital Pacman around about photo
+(function() {
+  const canvas = document.getElementById('orbit-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const SIZE = 190; // canvas px
+  const CX = SIZE / 2;
+  const CY = SIZE / 2;
+  const ORBIT  = 87; // orbit radius (just outside the 150px photo)
+  const R = 7; // pacman radius
+  const GR = 6; // ghost radius
+  const SPEED  = 0.022; // radians per frame at 60fps
+
+  canvas.width  = SIZE;
+  canvas.height = SIZE;
+
+  const COL  = '#F0EAD6';
+  const CEYE = '#8A9BB0';
+  const CPUP = '#0D1B2A';
+  const CDOT = '#F0EAD6';
+
+  // dots evenly around the orbit
+  const DOT_COUNT = 28;
+  const dots = Array.from({ length: DOT_COUNT }, (_, i) => ({
+    angle: (i / DOT_COUNT) * Math.PI * 2,
+    eaten: false
+  }));
+
+  let angle    = 0;     // pacman angle
+  let gAngle   = angle - 0.32; // ghost trails behind
+  let mouthT   = 0;
+  let mouthD   = 1;
+
+  function drawPac(a, t) {
+    const x = CX + Math.cos(a) * ORBIT;
+    const y = CY + Math.sin(a) * ORBIT;
+    // facing direction = tangent of orbit = a + PI/2
+    const face = a + Math.PI / 2;
+    const open = t * Math.PI / 3;
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(face);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, R, open, 2 * Math.PI - open, false);
+    ctx.closePath();
+    ctx.fillStyle = COL;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawGhost(a) {
+    const x = CX + Math.cos(a) * ORBIT;
+    const y = CY + Math.sin(a) * ORBIT;
+    const b = GR;
+    const bm = GR * 0.4;
+
+    ctx.save();
+    ctx.translate(x, y - GR);
+    ctx.beginPath();
+    ctx.arc(0, GR * 0.6, GR, Math.PI, 0, false);
+    ctx.lineTo(GR, b * 2);
+    ctx.quadraticCurveTo( GR * 0.67, b * 2 + bm,  GR * 0.33, b * 2);
+    ctx.quadraticCurveTo( 0, b * 2 - bm, -GR * 0.33, b * 2);
+    ctx.quadraticCurveTo(-GR * 0.67, b * 2 + bm, -GR, b * 2);
+    ctx.lineTo(-GR, GR * 0.6);
+    ctx.closePath();
+    ctx.fillStyle = COL;
+    ctx.fill();
+
+    // eyes
+    const ey = GR * 0.4;
+    const ps = 1.2; // shift right
+    [-GR * 0.35, GR * 0.35].forEach(ox => {
+      ctx.beginPath();
+      ctx.ellipse(ox, ey, GR * 0.28, GR * 0.32, 0, 0, Math.PI * 2);
+      ctx.fillStyle = CEYE; ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(ox + ps, ey, GR * 0.12, GR * 0.14, 0, 0, Math.PI * 2);
+      ctx.fillStyle = CPUP; ctx.fill();
+    });
+    ctx.restore();
+  }
+
+  let last = null;
+  function frame(ts) {
+    const dt = last === null ? 16 : Math.min(ts - last, 50);
+    last = ts;
+    const step = SPEED * (dt / 16);
+
+    ctx.clearRect(0, 0, SIZE, SIZE);
+
+    // draw dots
+    dots.forEach(d => {
+      if (!d.eaten) {
+        const dx = CX + Math.cos(d.angle) * ORBIT;
+        const dy = CY + Math.sin(d.angle) * ORBIT;
+        ctx.beginPath();
+        ctx.arc(dx, dy, 2, 0, Math.PI * 2);
+        ctx.fillStyle = CDOT;
+        ctx.fill();
+      }
+      // eat if pacman is close in angle
+      if (!d.eaten) {
+        let diff = ((d.angle - angle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        if (diff > Math.PI) diff = Math.PI * 2 - diff;
+        if (diff < 0.18) d.eaten = true;
+      }
+    });
+
+    // reset dots when all eaten
+    if (dots.every(d => d.eaten)) dots.forEach(d => d.eaten = false);
+
+    mouthT += 0.09 * mouthD * (dt / 16);
+    if (mouthT >= 1) { mouthT = 1; mouthD = -1; }
+    if (mouthT <= 0) { mouthT = 0; mouthD =  1; }
+
+    drawPac(angle, mouthT);
+
+    angle += step;
+    gAngle += step;
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();

@@ -54,10 +54,9 @@
 
     <p class="home-contact-note">In case this site didn't answer all your questions or you'd simply like to contact me, hop over to the <a href="#" onclick="showPage('about', document.querySelectorAll('.nav-item')[4]); setTimeout(()=>document.getElementById('about-section').scrollIntoView({behavior:'smooth'}),50)">contact section</a> and send me a message!</p>
 
-    <hr class="home-rule">
-
-    <!-- Thumbnail grid -->
-    <div class="thumb-grid" id="thumb-grid">
+    <!-- Pacman animation -->
+    <div class="pacman-strip" aria-hidden="true">
+      <canvas id="pacman-canvas" width="760" height="48"></canvas>
     </div>
 
   </div>
@@ -140,10 +139,18 @@
   <!-- ABOUT -->
   <div id="page-about" class="page">
 
-    <div class="about-text" style="max-width:580px;">
-      <p>Hi, seeing as you may or may not have reached this page by your own intent I'm probably obliged to tell you a bit more about myself.</p>
-      <p>My name is <strong>Oktay Sırmaçekici</strong> and as the title of this page suggests I'm a huge enthusiast when it comes to game design and development. My official papers suggest I managed to secure a Bachelor's degree in Mathematics, together with a multiple certifacetes of design and development of games. Unofficially, when the streets go dark, you'll often see me tinkering on low level game design and systems in things like D&D type TTRPG's and board games. Like most people in those fields, I love video games and films as the art form that they are: a brilliant composition of story, visuals, music, fx and I'd love to play a significant role in that in future endeavours.</p>
-      <p>Now, with passion of games and art, I've created this website to advertise my game design portfolio to see in whatever exciting and new direction this might take me. Feel free to reach out through any of the links below.</p>
+    <div class="about-layout">
+      <div class="about-text" style="max-width:580px;">
+        <p>Hi, seeing as you may or may not have reached this page by your own intent I'm probably obliged to tell you a bit more about myself.</p>
+        <p>My name is <strong>Oktay Sırmaçekici</strong> and as the title of this page suggests I'm a huge enthusiast when it comes to game design and development. My official papers suggest I managed to secure a Bachelor's degree in Mathematics, together with a multiple certifacetes of design and development of games. Unofficially, when the streets go dark, you'll often see me tinkering on low level game design and systems in things like D&D type TTRPG's and board games. Like most people in those fields, I love video games and films as the art form that they are: a brilliant composition of story, visuals, music, fx and I'd love to play a significant role in that in future endeavours.</p>
+        <p>Now, with passion of games and art, I've created this website to advertise my game design portfolio to see in whatever exciting and new direction this might take me. Feel free to reach out through any of the links below.</p>
+      </div>
+      <div class="about-photo-wrap">
+        <canvas id="orbit-canvas"></canvas>
+        <div class="about-photo-circle">
+          <img src="images/ME.png" alt="me">
+        </div>
+      </div>
     </div>
 
   </div>
@@ -165,6 +172,10 @@
 
   <!-- DESIGNS -->
   <div id="page-designs" class="page">
+    <p class="portfolio-note">A collection of experimental designs and visual explorations.</p>
+    <!-- Thumbnail grid -->
+    <div class="thumb-grid" id="thumb-grid">
+    </div>
   </div>
 
   <footer>

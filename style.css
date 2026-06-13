@@ -434,13 +434,63 @@ nav {
 .p1-social-icon:hover { color: var(--text); }
 
 /* ABOUT PAGE */
-.about-wrap {
-  display: grid;
-  grid-template-columns: 1fr 120px;
-  gap: 24px;
-  margin-bottom: 24px;
-  align-items: start;
+.about-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
 }
+.about-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+  width: 190px;
+  height: 190px;
+}
+#orbit-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.about-photo-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--rule);
+}
+.about-photo-placeholder-circle {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1B2A3B, #243547);
+}
+.about-photo-circle img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 600px) {
+  .about-layout { flex-direction: column-reverse; align-items: center; }
+}
+
+/* PACMAN STRIP */
+.pacman-strip {
+  margin: 8px 0 0;
+  width: 100%;
+  overflow: hidden;
+  height: 32px;
+  background: var(--bg);
+}
+#pacman-canvas {
+  display: block;
+  width: 100%;
+  height: 32px;
+}
+
 .about-text p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; line-height: 1.75; }
 .about-photo {
   width: 100%;
