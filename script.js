@@ -223,18 +223,34 @@ function closeDetail() {
   document.getElementById('project-detail').classList.remove('active');
 }
 
-// Thumbnail grid 
+const designs = [
+  { src: 'images/Design/Gun_model.jpg', href: '#' },
+  { src: 'images/Design/hayalet.png', href: '#' },
+  { src: 'images/Design/Bendable_model.gif', href: '#' },
+  { src: 'images/Design/KEYDOT2.png', href: '#' },
+  { src: 'images/Design/hppotion.png', href: '#' },
+  { src: 'images/Design/vampire.png', href: '#' },
+  { src: 'images/Design/sword.png', href: '#' },
+  { src: 'images/Design/off hand - book.png', href: '#' },
+  { src: 'images/Design/base_planet_1.png', href: '#' },
+  { src: 'images/Design/base_planet_2.png', href: '#' },
+  { src: 'images/Design/base_background_combo.png', href: '#' },
+  { src: 'images/Design/fight bar.png', href: '#' },
+  { src: 'images/Design/scrolldeneme.png', href: '#' },
+  { src: 'images/Design/empty hand.png', href: '#' },
+
+];
+
 const grid = document.getElementById('thumb-grid');
-for (let i = 0; i < 25; i++) {
+designs.forEach(item => {
   const a = document.createElement('a');
-  a.href = '#';
-  const d = document.createElement('div');
-  d.className = 'thumb-placeholder';
-  const v = 27 + Math.floor(Math.random() * 15);
-  d.style.background = `linear-gradient(135deg, rgb(${v},${v+10},${v+20}), rgb(${v+8},${v+18},${v+28}))`;
-  a.appendChild(d);
+  a.href = item.href;
+  const img = document.createElement('img');
+  img.src = item.src;
+  img.alt = '';
+  a.appendChild(img);
   grid.appendChild(a);
-}
+});
 
 // Pacman animation
 (function() {
