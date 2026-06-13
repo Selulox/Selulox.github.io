@@ -10,6 +10,40 @@ function showPage(id, el) {
 const projects =
 {
   'project-1': {
+    title: 'KING\'S SECRET',
+    link: 'https://eggzodiac.itch.io/kings-secret',
+    content: [
+      { type: 'image', src: 'images/Projects/KINGS_SECRET/kıngs_secret.png' },
+      { type: 'image', src: 'images/Projects/KINGS_SECRET/Kings_road_gamplay.gif',},
+      { type: 'row',
+        src: 'images/Projects/KINGS_SECRET/Kings_road_map.png',
+        text: 'This was university gamejam project. I did the level design of the game.' },
+      { type: 'duo',
+        srcLeft: 'images/Projects/KINGS_SECRET/combat.jpg',
+        src: 'images/Projects/KINGS_SECRET/inventory.jpg',
+        text: 'We implemented a comprehensive inventory system for the game and managed the balance of items and resources also made a combat system from undertale.' },
+    ]
+  },
+
+  'project-2': {
+    title: 'STARGAZE',
+    link: 'https://eggzodiac.itch.io/stargaze',
+    content: [
+      { type: 'image', src: 'images/Projects/STARGAZE/main_wallpaper_star.jpg' },
+      { type: 'row',
+        src: 'images/Projects/STARGAZE/stargaze_gameplay.gif',
+        text: 'Stargaze is a game combining elements from galaga and vampire survivors.' },
+      { type: 'row',
+        src: 'images/Projects/STARGAZE/star_gaze_upgrade.jpg',
+        text: 'When the player reaches a certain score, they can unlock new upgrades for their ship.' },
+      { type: 'duo',
+        srcLeft: 'images/Projects/STARGAZE/Effects_2.gif',
+        src: 'images/Projects/STARGAZE/star_gaze_effects_1.jpg',
+        text: 'I have implemented visual effects for the game, enhancing the overall aesthetic and player experience.' },
+    ]
+  },
+
+  'project-3': {
     title: 'DATAMON',
     link: 'https://eggzodiac.itch.io/datamon',
     content: [
@@ -49,38 +83,7 @@ const projects =
         text:    'Routes connect towns and are filled with wild encounters. Each route has its own Pokémon pool and difficulty curve.' },
     ]
   },
-  'project-2': {
-    title: 'STARGAZE',
-    link: 'https://eggzodiac.itch.io/stargaze',
-    content: [
-      { type: 'image', src: 'images/Projects/STARGAZE/main_wallpaper_star.jpg' },
-      { type: 'row',
-        src: 'images/Projects/STARGAZE/stargaze_gameplay.gif',
-        text: 'Stargaze is a game combining elements from galaga and vampire survivors.' },
-      { type: 'row',
-        src: 'images/Projects/STARGAZE/star_gaze_upgrade.jpg',
-        text: 'When the player reaches a certain score, they can unlock new upgrades for their ship.' },
-      { type: 'duo',
-        srcLeft: 'images/Projects/STARGAZE/Effects_2.gif',
-        src: 'images/Projects/STARGAZE/star_gaze_effects_1.jpg',
-        text: 'I have implemented visual effects for the game, enhancing the overall aesthetic and player experience.' },
-    ]
-  },
-  'project-3': {
-    title: 'KING\'S SECRET',
-    link: 'https://eggzodiac.itch.io/kings-secret',
-    content: [
-      { type: 'image', src: 'images/Projects/KINGS_SECRET/kıngs_secret.png' },
-      { type: 'image', src: 'images/Projects/KINGS_SECRET/Kings_road_gamplay.gif',},
-      { type: 'row',
-        src: 'images/Projects/KINGS_SECRET/Kings_road_map.png',
-        text: 'This was university gamejam project. I did the level design of the game.' },
-      { type: 'duo',
-        srcLeft: 'images/Projects/KINGS_SECRET/combat.jpg',
-        src: 'images/Projects/KINGS_SECRET/inventory.jpg',
-        text: 'We implemented a comprehensive inventory system for the game and managed the balance of items and resources also made a combat system from undertale.' },
-    ]
-  },
+
   'project-4': {
     title: 'Project Four',
     link: 'https://itch.io/',
