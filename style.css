@@ -384,7 +384,7 @@ nav {
   justify-content: center;
 }
 .pd-block-text p {
-  font-size: 13px;
+  font-size: 20px;
   color: var(--text);
   line-height: 1.8;
   margin-bottom: 12px;
@@ -392,7 +392,7 @@ nav {
 .pd-block-text p:last-child { margin-bottom: 0; }
 .pd-block-text p strong { color: var(--accent-r); }
 
-/* Legacy fallback — plain <p> tags still work */
+/* Legacy fallback*/
 .pd-content > p {
   font-size: 13.5px;
   color: var(--muted);
@@ -538,7 +538,7 @@ footer {
   cursor: zoom-in;
 }
 
-/* ── Lightbox ── */
+/* Lightbox */
 #lightbox {
   display: none;
   position: fixed;

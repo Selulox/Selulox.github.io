@@ -18,17 +18,17 @@ const projects =
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/battle.jpg',
         src: 'images/Projects/DATAMON/battle_move.jpg',
-        text: 'This is a battle scene with a Pokémon in action.' 
+        text: 'This is a battle scene with a Pokémon in action. Pokemon battles are turn-based, where you select moves to attack, defend, or use items. Each pokemon can inflict different status effects and have unique stats that influence the battle outcome.' 
       },
 
       { type: 'row',
         src: 'images/Projects/DATAMON/move1.jpg',
-        text: 'Each Pokémon has a set of moves. The left panel shows the move list; the right shows it in action during battle.' },
+        text: 'Each Pokémon has a set of moves. The left panel shows the move list; you can debuff, bleed or even stress the opponent.' },
 
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/pokemon.jpg',
         src: 'images/Projects/DATAMON/part.jpg',
-        text: 'Manage your party between battles. Swap members, check stats, and plan your team composition.' },
+        text: 'I have written a script to manage pokemons in a data level. Manage your party between battles. Swap members, check stats, and plan your team composition.' },
 
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/shopstock.jpg',
@@ -50,9 +50,16 @@ const projects =
     link: 'https://eggzodiac.itch.io/stargaze',
     content: [
       { type: 'image', src: 'images/Projects/STARGAZE/main_wallpaper_star.jpg' },
-      { type: 'text',  body: 'Describe what is happening in the screenshot above.' },
-      { type: 'image', src: '' },
-      { type: 'text',  body: 'Continue the breakdown of the project here.' },
+      { type: 'row',
+        src: 'images/Projects/STARGAZE/stargaze_gameplay.gif',
+        text: 'Stargaze is a game combining elements from galaga and vampire survivors.' },
+      { type: 'row',
+        src: 'images/Projects/STARGAZE/star_gaze_upgrade.jpg',
+        text: 'When the player reaches a certain score, they can unlock new upgrades for their ship.' },
+      { type: 'duo',
+        srcLeft: 'images/Projects/STARGAZE/Effects_2.gif',
+        src: 'images/Projects/STARGAZE/star_gaze_effects_1.jpg',
+        text: 'I have implemented visual effects for the game, enhancing the overall aesthetic and player experience.' },
     ]
   },
   'project-3': {
@@ -60,9 +67,14 @@ const projects =
     link: 'https://eggzodiac.itch.io/kings-secret',
     content: [
       { type: 'image', src: 'images/Projects/KINGS_SECRET/kıngs_secret.png' },
-      { type: 'text',  body: 'Describe what is happening in the screenshot above.' },
-      { type: 'image', src: '' },
-      { type: 'text',  body: 'Continue the breakdown of the project here.' },
+      { type: 'image', src: 'images/Projects/KINGS_SECRET/Kings_road_gamplay.gif',},
+      { type: 'row',
+        src: 'images/Projects/KINGS_SECRET/Kings_road_map.png',
+        text: 'This was university gamejam project. I did the level design of the game.' },
+      { type: 'duo',
+        srcLeft: 'images/Projects/KINGS_SECRET/combat.jpg',
+        src: 'images/Projects/KINGS_SECRET/inventory.jpg',
+        text: 'We implemented a comprehensive inventory system for the game and managed the balance of items and resources also made a combat system from undertale.' },
     ]
   },
   'project-4': {
@@ -83,9 +95,9 @@ document.querySelectorAll('.proj-play-icon[data-project]').forEach(a => {
   if (p) a.href = p.link;
 });
 
-// ── Lightbox ──────────────────────────────────────────────────────────────────
-let _lbImages = [];   // flat array of src strings for current project
-let _lbIndex  = 0;
+// Lightbox 
+let _lbImages = []; 
+let _lbIndex = 0;
 
 function openLightbox(srcs, startIndex) {
   _lbImages = srcs;
@@ -124,12 +136,12 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeDetail();
     return;
   }
-  if (e.key === 'Escape')     closeLightbox();
-  if (e.key === 'ArrowLeft')  lbPrev();
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbPrev();
   if (e.key === 'ArrowRight') lbNext();
 });
 
-// ── Project detail overlay ───────────────────────────────────────────────────
+// Project detail overlay 
 function openDetail(id) {
   const p = projects[id];
   if (!p) return;
@@ -150,7 +162,7 @@ function openDetail(id) {
     if (block.type === 'image' && block.src)     allSrcs.push(block.src);
   });
 
-  // Helper: clickable img tag — clicking opens lightbox at correct index
+  // Helper: clickable img tag
   function imgTag(src, srcList) {
     if (!src) return `<div class="pd-image-placeholder" style="aspect-ratio:16/9"></div>`;
     const idx = srcList.indexOf(src);
@@ -170,7 +182,6 @@ function openDetail(id) {
         </div>`;
     }
     else if (block.type === 'duo') {
-      // Layout: image left, image centre, text right (3 columns: 1fr 1fr 0.8fr)
       return `
         <div class="pd-block-row-duo">
           <div class="pd-block-img">${imgTag(block.srcLeft, allSrcs)}</div>
@@ -188,7 +199,6 @@ function openDetail(id) {
     }
   }).join('');
 
-  // Wire lightbox clicks via event delegation (avoids inline onclick quote issues)
   container.querySelectorAll('.lb-trigger').forEach(img => {
     img.addEventListener('click', () => {
       const srcs = JSON.parse(img.dataset.srcs);
