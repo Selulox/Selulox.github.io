@@ -15,6 +15,10 @@ const projects =
     content: [
       { type: 'hero', src: 'images/Projects/DATAMON/datamon_wallp.jpg', text: 'Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.' },
 
+      { type: 'row',
+        src: 'images/Projects/DATAMON/datanob.gif',
+        text: 'In Datamon, you can catch, use potions and battle with datamons.' },
+
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/battle.jpg',
         src: 'images/Projects/DATAMON/battle_move.jpg',
