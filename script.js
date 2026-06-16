@@ -85,13 +85,18 @@ const projects =
   },
 
   'project-4': {
-    title: 'Project Four',
-    link: 'https://itch.io/',
+    title: 'STRUGGLE',
+    link: 'files/Quick Start Guide v001.pdf',
     content: [
-      { type: 'image', src: '' },
-      { type: 'text',  body: 'Describe what is happening in the screenshot above.' },
-      { type: 'image', src: '' },
-      { type: 'text',  body: 'Continue the breakdown of the project here.' },
+      { type: 'image', src: 'images/Projects/STRUGGLE/ss.png' },
+      { type: 'text',  body: 'A TTRPG booklet that I helped create and design. Struggle is a concept we came up with to explore themes of resilience and perseverance in a fantasy setting in extreme situations.' },
+      { type: 'duo', 
+        srcLeft: 'images/Projects/STRUGGLE/equipment.jpg',
+        src: 'images/Projects/STRUGGLE/charter.jpg', 
+        text: 'The booklet includes detailed information about the equipment available in the game and character creation elements.' },
+      { type: 'row', src: 'images/Projects/STRUGGLE/class.jpg', text: 'The booklet also features detailed information about the different character classes available in the game and their descriptions.' },
+      { type: 'image', src: 'images/Projects/STRUGGLE/the struggle character sheet v001.png' },
+      { type: 'text',  body: 'Our run of the mill character sheet for the Struggle booklet.' },
     ]
   }
 };
@@ -240,6 +245,7 @@ const designs = [
   'images/Design/sword.png',
   'images/Design/vampire.png',
   'images/Design/torch.png',
+  "images/Design/ss.png",
 ];
 
 const grid = document.getElementById('thumb-grid');
