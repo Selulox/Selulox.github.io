@@ -401,6 +401,21 @@ nav {
 }
 .pd-content > p strong { color: var(--text); }
 
+/* Long-form passages (e.g. booklet excerpts) */
+.pd-block-longtext {
+  max-width: var(--col);
+  margin: 0 auto 32px;
+}
+.pd-block-longtext p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.pd-block-longtext p:last-child { margin-bottom: 0; }
+.pd-block-longtext p strong { color: var(--accent-r); }
+.pd-block-longtext p em { color: var(--text); }
+
 @media (max-width: 600px) {
   .pd-block-row,
   .pd-block-row-duo { grid-template-columns: 1fr; }

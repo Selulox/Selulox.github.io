@@ -89,7 +89,33 @@ const projects =
     link: 'files/Quick Start Guide v001.pdf',
     content: [
       { type: 'image', src: 'images/Projects/STRUGGLE/ss.png' },
-      { type: 'text',  body: 'A TTRPG booklet that I helped create and design. Struggle is a concept we came up with to explore themes of resilience and perseverance in a fantasy setting in extreme situations.' },
+      { type: 'text',  body: 'A TTRPG booklet that I helped create and design. Struggle is a concept we came up with to explore themes of resilience and perseverance in a fantasy setting in extreme situations. Below is a preview of some of the story of the world.' },
+      { type: 'longtext', body: `
+<strong>LAND OF WAR/DÂR’ÜL-HARB</strong>
+
+The Campaign of 1642 is at best, a campaign of horror, misery, war and scrape a living. You have
+to make the best of your abilities, your tools and more importantly, choices. You will try again and
+probably will fail a few times before you even get the “good ending” of it. What we’re trying to present
+you here is an experience of souls-like TTRPG campaign. So, for now, forget about those mighty paladins
+who fight against the apostles of Evil. Here is a quick rundown for you to know where to begin with…
+This is not an anthropocentric world you are living in. This is a world of Neme. Here, they are the
+rulers, they control the tide, they set the rules, they invent the paradigms. Mankind is merely an object,
+nothing more. Neme have their own hierarchical structures, authorities, superior-subordinate relationship,
+military, states, religions, ideologies. Also another story for another time.
+On the other hand, humanity is a slave-race since times unknown by the creatures called
+karaneme; the shapeshifters, the flesh-sculptors. They are depraved of everything. Food is scarce, water
+is only given as much as needed, even less sometimes. Men are used as tools for mining valuable
+resources from the bosom of The Earth and if they are lucky, sometimes as muscle power or technicians;
+women, on the other hand, breeding tools for the next generation of slaves.
+In a lifetime, women may breed ten, twenty or –if they are lucky— more children. Those women
+are left alone by karanemes. The next generation of man-slaves are more important then of present,
+obviously. Usually, this application does not end up with overpopulation of mankind because heavy loads
+of work, years of torture and undernutrition made impossible for them to live a long life, and that is the
+reason why women may breed eight to ten children at the very least. Or there will be no way to reproduce
+and survive.
+But in some cases where women breed more, man are healthier by some blind luck and they
+somehow manage to “thrive”, it raises some questions in the ranks of neme. If some If they are to live
+and overpopulate, then the regulations are in order to fix the miscalculations..` },
       { type: 'duo', 
         srcLeft: 'images/Projects/STRUGGLE/equipment.jpg',
         src: 'images/Projects/STRUGGLE/charter.jpg', 
@@ -174,6 +200,21 @@ function openDetail(id) {
     if (block.type === 'image' && block.src)     allSrcs.push(block.src);
   });
 
+  // Helper: turn a body (string or array of paragraphs) into <p> tags.
+  // - Array  -> one <p> per array item.
+  // - String -> a blank line starts a new paragraph. Single newlines
+  //             *within* a paragraph (e.g. the hard line-wraps you get
+  //             from copy-pasting out of a PDF/booklet) are collapsed
+  //             into a space so the text reflows naturally instead of
+  //             breaking mid-sentence. If you want a deliberate line
+  //             break, put a literal <br> in the text.
+  function renderParagraphs(body) {
+    const paras = Array.isArray(body) ? body : String(body).split(/\n\s*\n/);
+    return paras
+      .map(p => `<p>${p.replace(/\s*\n\s*/g, ' ').trim()}</p>`)
+      .join('');
+  }
+
   // Helper: clickable img tag
   function imgTag(src, srcList) {
     if (!src) return `<div class="pd-image-placeholder" style="aspect-ratio:16/9"></div>`;
@@ -206,8 +247,17 @@ function openDetail(id) {
         ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>`
         : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`;
     }
+    else if (block.type === 'longtext') {
+      // For long-form passages (e.g. booklet excerpts). body can be:
+      //  - a single string with blank lines between paragraphs, or
+      //  - an array of paragraph strings.
+      // Hard line-wraps within a paragraph are collapsed automatically.
+      return `<div class="pd-block-longtext">${renderParagraphs(block.body)}</div>`;
+    }
     else {
-      return `<p>${block.body}</p>`;
+      // Generic 'text' block — same paragraph handling as 'longtext',
+      // just without the narrower reading column.
+      return renderParagraphs(block.body);
     }
   }).join('');
 
@@ -222,10 +272,12 @@ function openDetail(id) {
   const el = document.getElementById('project-detail');
   el.classList.add('active');
   el.scrollTop = 0;
+  document.body.style.overflow = 'hidden'; // stop the page behind it from scrolling
 }
 
 function closeDetail() {
   document.getElementById('project-detail').classList.remove('active');
+  document.body.style.overflow = ''; // restore normal page scrolling
 }
 
 // Thumbnail grid, Design page
