@@ -1,11 +1,23 @@
-// Page switching 
-function showPage(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  if (el && el.classList) el.classList.add('active');
-  window.scrollTo(0, 0);
-}
+(function () {
+  const navItems = Array.from(document.querySelectorAll('.nav-item'));
+  const sections  = navItems
+    .map(n => document.getElementById(n.dataset.section))
+    .filter(Boolean);
+
+  function setActive(id) {
+    navItems.forEach(n => n.classList.toggle('active', n.dataset.section === id));
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.filter(e => e.isIntersecting);
+    if (visible.length) {
+      visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      setActive(visible[0].target.id);
+    }
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+})();
 
 const projects =
 {
@@ -127,7 +139,6 @@ and overpopulate, then the regulations are in order to fix the miscalculations..
   }
 };
 
-// Wire portfolio play buttons from projects data
 document.querySelectorAll('.proj-play-icon[data-project]').forEach(a => {
   const p = projects[a.dataset.project];
   if (p) a.href = p.link;
@@ -139,7 +150,7 @@ let _lbIndex = 0;
 
 function openLightbox(srcs, startIndex) {
   _lbImages = srcs;
-  _lbIndex  = startIndex;
+  _lbIndex = startIndex;
   _renderLightbox();
   document.getElementById('lightbox').classList.add('active');
 }
@@ -188,26 +199,17 @@ function openDetail(id) {
 
   const container = document.getElementById('pd-content');
 
-  // Collect all real image srcs in order for the lightbox gallery
   const allSrcs = [];
   p.content.forEach(block => {
-    if (block.type === 'hero'  && block.src)     allSrcs.push(block.src);
-    if (block.type === 'row'   && block.src)     allSrcs.push(block.src);
+    if (block.type === 'hero'  && block.src) allSrcs.push(block.src);
+    if (block.type === 'row'   && block.src) allSrcs.push(block.src);
     if (block.type === 'duo') {
       if (block.srcLeft) allSrcs.push(block.srcLeft);
-      if (block.src)     allSrcs.push(block.src);
+      if (block.src) allSrcs.push(block.src);
     }
-    if (block.type === 'image' && block.src)     allSrcs.push(block.src);
+    if (block.type === 'image' && block.src) allSrcs.push(block.src);
   });
 
-  // Helper: turn a body (string or array of paragraphs) into <p> tags.
-  // - Array  -> one <p> per array item.
-  // - String -> a blank line starts a new paragraph. Single newlines
-  //             *within* a paragraph (e.g. the hard line-wraps you get
-  //             from copy-pasting out of a PDF/booklet) are collapsed
-  //             into a space so the text reflows naturally instead of
-  //             breaking mid-sentence. If you want a deliberate line
-  //             break, put a literal <br> in the text.
   function renderParagraphs(body) {
     const paras = Array.isArray(body) ? body : String(body).split(/\n\s*\n/);
     return paras
@@ -215,7 +217,6 @@ function openDetail(id) {
       .join('');
   }
 
-  // Helper: clickable img tag
   function imgTag(src, srcList) {
     if (!src) return `<div class="pd-image-placeholder" style="aspect-ratio:16/9"></div>`;
     const idx = srcList.indexOf(src);
@@ -243,20 +244,13 @@ function openDetail(id) {
         </div>`;
     }
     else if (block.type === 'image') {
-      return block.src
-        ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>`
-        : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`;
+      return block.src ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>` : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`;
     }
     else if (block.type === 'longtext') {
-      // For long-form passages (e.g. booklet excerpts). body can be:
-      //  - a single string with blank lines between paragraphs, or
-      //  - an array of paragraph strings.
-      // Hard line-wraps within a paragraph are collapsed automatically.
+
       return `<div class="pd-block-longtext">${renderParagraphs(block.body)}</div>`;
     }
     else {
-      // Generic 'text' block — same paragraph handling as 'longtext',
-      // just without the narrower reading column.
       return renderParagraphs(block.body);
     }
   }).join('');
@@ -315,25 +309,25 @@ designs.forEach((src, i) => {
   grid.appendChild(a);
 });
 
-// Pacman animation
-(function() {
-  const canvas = document.getElementById('pacman-canvas');
+// Pacman strip animation
+function initPacmanStrip(canvasId) {
+  const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const H  = 32;
+  const H = 32;
   const CY = H / 2;
-  const R  = 7;
+  const R = 7;
   const GR = 6;
   const SPEED = 1.6;
 
-  const COL  = '#F0EAD6';
+  const COL = '#F0EAD6';
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
   const CDOT = '#2A3D52';
 
   let W = canvas.offsetWidth || 760;
-  canvas.width  = W;
+  canvas.width = W;
   canvas.height = H;
 
   // dots
@@ -344,14 +338,13 @@ designs.forEach((src, i) => {
   }
   makeDots();
 
-  let dir    = 1;      // 1=right, -1=left
-  let pacX   = -R * 3;
+  let dir = 1; // 1=right, -1=left
+  let pacX = -R * 3;
   let ghostX = pacX - GR * 4;
-  let mouthT = 0;      // 0=closed, 1=open
+  let mouthT = 0; // 0=closed, 1=open
   let mouthD = 1;
 
   function drawPac(x, t, d) {
-    // draw a filled circle then cut the mouth wedge out
     const angle = t * Math.PI / 3; // 0 to 60 degrees
     ctx.save();
     ctx.translate(x, CY);
@@ -366,15 +359,15 @@ designs.forEach((src, i) => {
   }
 
   function drawGhost(x) {
-    const t  = CY - GR;
-    const b  = CY + GR;
+    const t = CY - GR;
+    const b = CY + GR;
     const bm = GR * 0.4;
     ctx.beginPath();
     ctx.arc(x, t + GR * 0.6, GR, Math.PI, 0, false);
     ctx.lineTo(x + GR, b);
     ctx.quadraticCurveTo(x + GR * 0.67, b + bm, x + GR * 0.33, b);
-    ctx.quadraticCurveTo(x,             b - bm,  x - GR * 0.33, b);
-    ctx.quadraticCurveTo(x - GR * 0.67, b + bm,  x - GR,        b);
+    ctx.quadraticCurveTo(x, b - bm,  x - GR * 0.33, b);
+    ctx.quadraticCurveTo(x - GR * 0.67, b + bm,  x - GR, b);
     ctx.lineTo(x - GR, t + GR * 0.6);
     ctx.closePath();
     ctx.fillStyle = COL;
@@ -394,7 +387,6 @@ designs.forEach((src, i) => {
 
   let last = null;
   function frame(ts) {
-    // cap delta so tab-switch doesn't cause a huge jump
     const dt = last === null ? 16 : Math.min(ts - last, 50);
     last = ts;
     const step = SPEED * dt / 16;
@@ -436,7 +428,9 @@ designs.forEach((src, i) => {
   }
 
   requestAnimationFrame(frame);
-})();
+}
+
+['pacman-canvas', 'pacman-divider-games', 'pacman-divider-designs'].forEach(initPacmanStrip);
 
 // Orbital Pacman around about photo
 (function() {
@@ -444,33 +438,30 @@ designs.forEach((src, i) => {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const SIZE   = 190;          // canvas px
-  const CX     = SIZE / 2;
-  const CY     = SIZE / 2;
-  const ORBIT  = 87;           // orbit radius (just outside the 150px photo)
-  const R      = 7;            // pacman radius
-  const GR     = 6;            // ghost radius
-  const SPEED  = 0.022;        // radians per frame at 60fps
+  const SIZE = 280; // canvas px
+  const CX = SIZE / 2;
+  const CY = SIZE / 2;
+  const ORBIT = 128; // orbit radius (just outside the 220px photo)
+  const R = 7; // pacman radius
+  const GR = 6; // ghost radius
+  const SPEED = 0.022; // radians per frame at 60fps
 
-  canvas.width  = SIZE;
+  canvas.width = SIZE;
   canvas.height = SIZE;
 
-  const COL  = '#F0EAD6';
+  const COL = '#F0EAD6';
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
   const CDOT = '#2A3D52';
 
   // dots evenly around the orbit
-  const DOT_COUNT = 28;
-  const dots = Array.from({ length: DOT_COUNT }, (_, i) => ({
-    angle: (i / DOT_COUNT) * Math.PI * 2,
-    eaten: false
-  }));
+  const DOT_COUNT = 41;
+  const dots = Array.from({ length: DOT_COUNT }, (_, i) => ({ angle: (i / DOT_COUNT) * Math.PI * 2, eaten: false }));
 
-  let angle    = 0;     // pacman angle
-  let gAngle   = angle - 0.32; // ghost trails behind
-  let mouthT   = 0;
-  let mouthD   = 1;
+  let angle = 0; // pacman angle
+  let gAngle = angle - 0.32; // ghost trails behind
+  let mouthT = 0;
+  let mouthD = 1;
 
   function drawPac(a, t) {
     const x = CX + Math.cos(a) * ORBIT;
@@ -494,7 +485,7 @@ designs.forEach((src, i) => {
   function drawGhost(a) {
     const x = CX + Math.cos(a) * ORBIT;
     const y = CY + Math.sin(a) * ORBIT;
-    const b  = GR;
+    const b = GR;
     const bm = GR * 0.4;
 
     ctx.save();
@@ -503,14 +494,14 @@ designs.forEach((src, i) => {
     ctx.arc(0, GR * 0.6, GR, Math.PI, 0, false);
     ctx.lineTo(GR, b * 2);
     ctx.quadraticCurveTo( GR * 0.67, b * 2 + bm,  GR * 0.33, b * 2);
-    ctx.quadraticCurveTo( 0,         b * 2 - bm, -GR * 0.33, b * 2);
-    ctx.quadraticCurveTo(-GR * 0.67, b * 2 + bm, -GR,        b * 2);
+    ctx.quadraticCurveTo( 0, b * 2 - bm, -GR * 0.33, b * 2);
+    ctx.quadraticCurveTo(-GR * 0.67, b * 2 + bm, -GR, b * 2);
     ctx.lineTo(-GR, GR * 0.6);
     ctx.closePath();
     ctx.fillStyle = COL;
     ctx.fill();
 
-    // eyes — pupils look forward (clockwise along orbit)
+    // eyes
     const ey = GR * 0.4;
     const ps = 1.2; // shift right = forward in local space
     [-GR * 0.35, GR * 0.35].forEach(ox => {
@@ -559,7 +550,7 @@ designs.forEach((src, i) => {
 
     drawPac(angle, mouthT);
 
-    angle  += step;
+    angle += step;
     gAngle += step;
 
     requestAnimationFrame(frame);
