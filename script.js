@@ -129,10 +129,10 @@ But in some cases where women breed more, man are healthier by some blind luck a
 somehow manage to “thrive”, it raises some questions in the ranks of neme. If some If they are to live
 and overpopulate, then the regulations are in order to fix the miscalculations..` },
       { type: 'duo', 
-        srcLeft: 'images/Projects/STRUGGLE/equipment.jpg',
-        src: 'images/Projects/STRUGGLE/charter.jpg', 
+        srcLeft: 'images/Projects/STRUGGLE/equipment.png',
+        src: 'images/Projects/STRUGGLE/charter.png', 
         text: 'The booklet includes detailed information about the equipment available in the game and character creation elements.' },
-      { type: 'row', src: 'images/Projects/STRUGGLE/class.jpg', text: 'The booklet also features detailed information about the different character classes available in the game and their descriptions.' },
+      { type: 'row', src: 'images/Projects/STRUGGLE/class.png', text: 'The booklet also features detailed information about the different character classes available in the game and their descriptions.' },
       { type: 'image', src: 'images/Projects/STRUGGLE/the struggle character sheet v001.png' },
       { type: 'text',  body: 'Our run of the mill character sheet for the Struggle booklet.' },
     ]
