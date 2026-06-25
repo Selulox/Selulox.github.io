@@ -2,21 +2,25 @@
 
 :root 
 {
-  --bg: #0D1B2A;
-  --bg-inner:#1B2A3B;
-  --text:#F0EAD6;
-  --muted:#8A9BB0;
-  --light:#6A7D92;
-  --rule:#2A3D52;
-  --accent-r:#D4B483;
-  --accent-b:#D4B483;
-  --accent-g:#D4B483;
-  --link:#D4B483;
-  --link-hover:#F0EAD6;
+--bg: #0A0C08;
+--bg-inner: #141810;
+--text: #EEFAD0;
+--muted: #708A40;
+--rule: #1C2616;
+  --accent-r:#88C020;
+  --accent-b:#88C020;
+  --accent-g:#88C020;
+--link: #88C020;
+--link-hover: #EEFAD0;
   --font-head: 'Oswald', sans-serif;
   --font-body: 'Source Serif 4', serif;
   --font-ui: 'Source Sans 3', sans-serif;
   --col: 720px;
+}:root {
+
+--accent: #3A5C20;
+--accent-hi: ;
+
 }
 
 html { scroll-behavior: smooth; }

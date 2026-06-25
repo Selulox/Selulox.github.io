@@ -324,7 +324,7 @@ function initPacmanStrip(canvasId) {
   const COL = '#F0EAD6';
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
-  const CDOT = '#2A3D52';
+  const CDOT = '#88C020';
 
   let W = canvas.offsetWidth || 760;
   canvas.width = W;
@@ -452,7 +452,7 @@ function initPacmanStrip(canvasId) {
   const COL = '#F0EAD6';
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
-  const CDOT = '#2A3D52';
+  const CDOT = '#88C020';
 
   // dots evenly around the orbit
   const DOT_COUNT = 41;
