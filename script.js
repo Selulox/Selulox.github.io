@@ -269,9 +269,23 @@ function openDetail(id) {
   document.body.style.overflow = 'hidden'; // stop the page behind it from scrolling
 }
 
-function closeDetail() {
+function closeDetail(targetSection) {
   document.getElementById('project-detail').classList.remove('active');
   document.body.style.overflow = ''; // restore normal page scrolling
+  if (targetSection) {
+    const el = document.getElementById(targetSection);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function navigateToSection(sectionId) {
+  const isDetailOpen = document.getElementById('project-detail').classList.contains('active');
+  if (isDetailOpen) {
+    closeDetail(sectionId);
+  } else {
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 // Thumbnail grid, Design page

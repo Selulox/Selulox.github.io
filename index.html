@@ -12,7 +12,7 @@
 <!-- MOBILE TOP BAR (sidebar collapses to this under 880px) -->
 <div class="top-bar">
   <div class="logo-block">
-    <div class="logo-name">
+    <div class="logo-name" onclick="navigateToSection('home')" style="cursor:pointer;" title="Go to Home">
       <span class="l1">O</span><span class="l2">K</span><span class="l3">T</span><span class="l4">A</span><span class="l5">Y</span>&nbsp;<span class="l6">S</span><span class="l7">I</span><span class="l8">R</span><span class="l9">M</span><span class="l9">A</span><span class="l10">Ç</span><span class="l11">E</span><span class="l12">K</span><span class="l13">İ</span><span class="l14">C</span><span class="l15">İ</span>
     </div>
     <span class="logo-sep">
@@ -33,7 +33,7 @@
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <div class="logo-name">
+      <div class="logo-name" onclick="navigateToSection('home')" style="cursor:pointer;" title="Go to Home">
         <span class="l1">O</span><span class="l2">K</span><span class="l3">T</span><span class="l4">A</span><span class="l5">Y</span>&nbsp;<span class="l6">S</span><span class="l7">I</span><span class="l8">R</span><span class="l9">M</span><span class="l9">A</span><span class="l10">Ç</span><span class="l11">E</span><span class="l12">K</span><span class="l13">İ</span><span class="l14">C</span><span class="l15">İ</span>
       </div>
       <span class="logo-sep">
@@ -49,11 +49,11 @@
     <div class="sidebar-tagline">Game<span class="pipe">&nbsp;&amp;&nbsp;</span>System Designer</div>
 
     <nav class="side-nav">
-      <a class="nav-item active" data-section="home" href="#home">Home</a>
-      <a class="nav-item" data-section="games" href="#games">Games</a>
-      <a class="nav-item" data-section="designs" href="#designs">Designs</a>
-      <a class="nav-item" data-section="about" href="#about">About</a>
-      <a class="nav-item" data-section="resume" href="#resume">Resume</a>
+      <a class="nav-item active" data-section="home" href="#home" onclick="navigateToSection('home'); return false;">Home</a>
+      <a class="nav-item" data-section="games" href="#games" onclick="navigateToSection('games'); return false;">Games</a>
+      <a class="nav-item" data-section="designs" href="#designs" onclick="navigateToSection('designs'); return false;">Designs</a>
+      <a class="nav-item" data-section="about" href="#about" onclick="navigateToSection('about'); return false;">About</a>
+      <a class="nav-item" data-section="resume" href="#resume" onclick="navigateToSection('resume'); return false;">Resume</a>
     </nav>
 
     <div class="sidebar-socials">
@@ -74,11 +74,11 @@
 
   <!-- MOBILE NAV -->
   <nav class="mobile-nav" id="mobileNav">
-    <a class="nav-item active" data-section="home" href="#home">Home</a>
-    <a class="nav-item" data-section="games" href="#games">Games</a>
-    <a class="nav-item" data-section="designs" href="#designs">Designs</a>
-    <a class="nav-item" data-section="about" href="#about">About</a>
-    <a class="nav-item" data-section="resume" href="#resume">Resume</a>
+    <a class="nav-item active" data-section="home" href="#home" onclick="navigateToSection('home'); return false;">Home</a>
+    <a class="nav-item" data-section="games" href="#games" onclick="navigateToSection('games'); return false;">Games</a>
+    <a class="nav-item" data-section="designs" href="#designs" onclick="navigateToSection('designs'); return false;">Designs</a>
+    <a class="nav-item" data-section="about" href="#about" onclick="navigateToSection('about'); return false;">About</a>
+    <a class="nav-item" data-section="resume" href="#resume" onclick="navigateToSection('resume'); return false;">Resume</a>
   </nav>
 
   <!-- MAIN CONTENT -->
