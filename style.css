@@ -16,11 +16,6 @@
   --font-body: 'Source Serif 4', serif;
   --font-ui: 'Source Sans 3', sans-serif;
   --col: 720px;
-}:root {
-
---accent: #3A5C20;
---accent-hi: ;
-
 }
 
 html { scroll-behavior: smooth; }
