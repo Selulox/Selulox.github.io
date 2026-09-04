@@ -6,12 +6,27 @@
 <title>Oktay Sırmaçekici | Game &amp; Mechanics Designer</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="images/Logo.png">
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('site-theme');
+      var theme = saved || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- MOBILE TOP BAR (sidebar collapses to this under 880px) -->
 <div class="top-bar">
+  <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle light and dark theme">
+    <svg id="themeIconMobile" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <span id="themeLabelMobile">Light</span>
+  </button>
   <div class="logo-block">
     <div class="logo-name" onclick="navigateToSection('home')" style="cursor:pointer;" title="Go to Home">
       <span class="l1">O</span><span class="l2">K</span><span class="l3">T</span><span class="l4">A</span><span class="l5">Y</span>&nbsp;<span class="l6">S</span><span class="l7">I</span><span class="l8">R</span><span class="l9">M</span><span class="l9">A</span><span class="l10">Ç</span><span class="l11">E</span><span class="l12">K</span><span class="l13">İ</span><span class="l14">C</span><span class="l15">İ</span>
@@ -51,11 +66,16 @@
 
     <nav class="side-nav">
       <a class="nav-item active" data-section="home" href="#home" onclick="navigateToSection('home'); return false;">Home</a>
-      <a class="nav-item" data-section="games" href="#games" onclick="navigateToSection('games'); return false;">Games</a>
+      <a class="nav-item has-flyout" data-section="games" href="#games" onclick="navigateToSection('games'); return false;">Games<span class="flyout-chevron" aria-hidden="true">›</span></a>
       <a class="nav-item" data-section="designs" href="#designs" onclick="navigateToSection('designs'); return false;">Designs</a>
       <a class="nav-item" data-section="about" href="#about" onclick="navigateToSection('about'); return false;">About</a>
       <a class="nav-item" data-section="resume" href="#resume" onclick="navigateToSection('resume'); return false;">Resume</a>
     </nav>
+
+    <button class="theme-toggle" id="themeToggleSidebar" aria-label="Toggle light and dark theme">
+      <svg id="themeIconSidebar" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <span id="themeLabelSidebar">Light mode</span>
+    </button>
 
     <div class="sidebar-socials">
       <a href="mailto:oktaysrma@gmail.com" class="p1-social-icon" aria-label="Email">
@@ -268,6 +288,26 @@
   </div>
   <button class="lb-arrow lb-next" id="lb-next" onclick="lbNext()" aria-label="Next">&#8594;</button>
   <div class="lb-counter" id="lb-counter">1 / 1</div>
+</div>
+
+<!-- GAMES SIDEWAYS FLYOUT (desktop sidebar only) -->
+<div id="games-flyout" role="menu" aria-label="Games submenu">
+  <a href="#" class="flyout-item" data-flyout-project="project-4" role="menuitem">
+    <img src="images/Projects/STRUGGLE/struggle.png" alt="">
+    <span>Struggle</span>
+  </a>
+  <a href="#" class="flyout-item" data-flyout-project="project-1" role="menuitem">
+    <img src="images/Projects/KINGS_SECRET/kıngs_secret.png" alt="">
+    <span>King's Road</span>
+  </a>
+  <a href="#" class="flyout-item" data-flyout-project="project-2" role="menuitem">
+    <img src="images/Projects/STARGAZE/main_wallpaper_star.jpg" alt="">
+    <span>Stargaze</span>
+  </a>
+  <a href="#" class="flyout-item" data-flyout-project="project-3" role="menuitem">
+    <img src="images/Projects/DATAMON/datamon_wallp.jpg" alt="">
+    <span>Datamon</span>
+  </a>
 </div>
 
 <script src="script.js"></script>

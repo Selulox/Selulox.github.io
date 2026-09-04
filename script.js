@@ -1,3 +1,51 @@
+// Theme toggle (dark / light) with saved preference
+(function () {
+  const STORAGE_KEY = 'site-theme';
+  const root = document.documentElement;
+
+  function getSavedTheme() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  }
+  function saveTheme(theme) {
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) { /* ignore */ }
+  }
+
+  let theme = getSavedTheme() || 'light';
+  root.setAttribute('data-theme', theme);
+
+  function updateToggleUI() {
+    const isLight = theme === 'light';
+    const sidebarLabel = document.getElementById('themeLabelSidebar');
+    if (sidebarLabel) sidebarLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
+    const mobileLabel = document.getElementById('themeLabelMobile');
+    if (mobileLabel) mobileLabel.textContent = isLight ? 'Dark' : 'Light';
+    [document.getElementById('themeIconSidebar'), document.getElementById('themeIconMobile')].forEach(icon => {
+      if (!icon) return;
+      icon.style.opacity = isLight ? '0.9' : '1';
+    });
+  }
+
+  function toggleTheme() {
+    theme = theme === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', theme);
+    saveTheme(theme);
+    updateToggleUI();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateToggleUI();
+    const sidebarBtn = document.getElementById('themeToggleSidebar');
+    const mobileBtn = document.getElementById('themeToggleMobile');
+    if (sidebarBtn) sidebarBtn.addEventListener('click', toggleTheme);
+    if (mobileBtn) mobileBtn.addEventListener('click', toggleTheme);
+  });
+})();
+
+function themeColor(varName, fallback) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  return v || fallback;
+}
+
 (function () {
   const navItems = Array.from(document.querySelectorAll('.nav-item'));
   const sections  = navItems
@@ -190,6 +238,72 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNext();
 });
 
+// GAMES SIDEWAYS FLYOUT
+(function () {
+  const trigger = document.querySelector('.side-nav .nav-item[data-section="games"]');
+  const flyout = document.getElementById('games-flyout');
+  const sidebar = document.querySelector('.sidebar');
+  if (!trigger || !flyout || !sidebar) return;
+
+  let hideTimer = null;
+
+  function isDesktop() {
+    return window.innerWidth > 880;
+  }
+
+  function position() {
+    const navRect = trigger.getBoundingClientRect();
+    const sideRect = sidebar.getBoundingClientRect();
+    flyout.style.left = sideRect.right + 'px';
+    const top = Math.min(navRect.top, window.innerHeight - flyout.offsetHeight - 12);
+    flyout.style.top = Math.max(8, top) + 'px';
+  }
+
+  function open() {
+    if (!isDesktop()) return;
+    clearTimeout(hideTimer);
+    flyout.classList.add('open');
+    trigger.classList.add('flyout-active');
+    position();
+  }
+
+  function scheduleClose() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      flyout.classList.remove('open');
+      trigger.classList.remove('flyout-active');
+    }, 180);
+  }
+
+  trigger.addEventListener('mouseenter', open);
+  trigger.addEventListener('focus', open);
+  trigger.addEventListener('mouseleave', scheduleClose);
+  trigger.addEventListener('blur', scheduleClose);
+  flyout.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  flyout.addEventListener('mouseleave', scheduleClose);
+
+  flyout.querySelectorAll('[data-flyout-project]').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      clearTimeout(hideTimer);
+      flyout.classList.remove('open');
+      trigger.classList.remove('flyout-active');
+      openDetail(item.dataset.flyoutProject);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      flyout.classList.remove('open');
+      trigger.classList.remove('flyout-active');
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (flyout.classList.contains('open')) position();
+  });
+})();
+
 // Project detail overlay 
 function openDetail(id) {
   const p = projects[id];
@@ -335,10 +449,10 @@ function initPacmanStrip(canvasId) {
   const GR = 6;
   const SPEED = 1.6;
 
-  const COL = '#F0EAD6';
+  let COL = themeColor('--text', '#F0EAD6');
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
-  const CDOT = '#88C020';
+  let CDOT = themeColor('--link', '#88C020');
 
   let W = canvas.offsetWidth || 760;
   canvas.width = W;
@@ -408,6 +522,9 @@ function initPacmanStrip(canvasId) {
     W = canvas.offsetWidth || W;
     if (canvas.width !== W) { canvas.width = W; makeDots(); }
 
+    COL = themeColor('--text', COL);
+    CDOT = themeColor('--link', CDOT);
+
     ctx.clearRect(0, 0, W, H);
 
     dots.forEach(d => {
@@ -463,10 +580,10 @@ function initPacmanStrip(canvasId) {
   canvas.width = SIZE;
   canvas.height = SIZE;
 
-  const COL = '#F0EAD6';
+  let COL = themeColor('--text', '#F0EAD6');
   const CEYE = '#8A9BB0';
   const CPUP = '#0D1B2A';
-  const CDOT = '#88C020';
+  let CDOT = themeColor('--link', '#88C020');
 
   // dots evenly around the orbit
   const DOT_COUNT = 41;
@@ -534,6 +651,9 @@ function initPacmanStrip(canvasId) {
     const dt = last === null ? 16 : Math.min(ts - last, 50);
     last = ts;
     const step = SPEED * (dt / 16);
+
+    COL = themeColor('--text', COL);
+    CDOT = themeColor('--link', CDOT);
 
     ctx.clearRect(0, 0, SIZE, SIZE);
 
