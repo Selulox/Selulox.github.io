@@ -1,5 +1,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --acid-green: #C6FF00;
+}
+
 :root,
 :root[data-theme="dark"]
 {
@@ -57,9 +61,9 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 }
 
 .sidebar {
-  width: 270px;
+  width: 230px;
   flex-shrink: 0;
-  padding: 40px 24px;
+  padding: 40px 16px;
   border-right: 1px solid var(--rule);
   position: sticky;
   top: 0;
@@ -69,6 +73,33 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   flex-direction: column;
   align-items: center;
   text-align: center;
+  /* wave-pattern background, tinted so the black nav text stays readable;
+     repeats in both directions so it can scroll sideways in a seamless loop */
+  background-image:
+    linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
+    url('images/acid_pattern.png');
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 230px auto;
+  background-position: center, 0 0;
+  animation: acid-scroll-x 10s linear infinite;
+  /* keep all sidebar text black regardless of the site's light/dark theme */
+  --text: #0A0C08;
+  --muted: #0A0C08;
+  --link: #0A0C08;
+  --link-hover: #0A0C08;
+  --rule: rgba(10, 12, 8, 0.25);
+  /* the ghost logo's eyes are cut out using --bg/--bg-inner; point them at
+     the sidebar's own background instead of the theme background, or they
+     match the now-black ghost body and disappear in dark mode */
+  --bg: var(--acid-green);
+  --bg-inner: var(--acid-green);
+}
+@keyframes acid-scroll-x {
+  from { background-position: center, 0 0; }
+  to   { background-position: center, -230px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar { animation: none; }
 }
 
 .sidebar-logo {
@@ -136,28 +167,32 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 }
 
 .side-nav .nav-item.has-flyout {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+  display: block;
+  position: relative;
+  text-align: center;
 }
 .side-nav .nav-item.has-flyout .flyout-chevron {
-  font-size: 13px;
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 700;
   line-height: 1;
-  opacity: 0.5;
-  transition: opacity 0.2s, transform 0.2s;
+  color: var(--muted);
+  transition: color 0.2s, transform 0.2s;
 }
 .side-nav .nav-item.has-flyout:hover .flyout-chevron,
 .side-nav .nav-item.has-flyout.flyout-active .flyout-chevron {
-  opacity: 1;
-  transform: translateX(2px);
+  color: var(--link);
+  transform: translateY(-50%) translateX(3px);
 }
 
 /* GAMES SIDEWAYS FLYOUT */
 #games-flyout {
   position: fixed;
   z-index: 600;
-  width: 230px;
+  width: 240px;
   background: var(--bg);
   border: 1px solid var(--rule);
   box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.10);
@@ -237,6 +272,9 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 }
 
 .theme-toggle {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -255,7 +293,30 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.theme-toggle:hover { color: var(--bg); background: var(--link); border-color: var(--link); }
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url('images/textures/acid-pattern.png');
+  background-repeat: repeat;
+  background-size: 56px 56px;
+  opacity: 0;
+  z-index: -1;
+  animation: acid-scroll 1.4s linear infinite;
+  animation-play-state: paused;
+  transition: opacity 0.25s ease;
+}
+.theme-toggle:hover {
+  color: #0A0C08;
+  background: var(--link); /* fallback fill if the texture fails to load */
+  border-color: var(--link);
+}
+.theme-toggle:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+.sidebar .theme-toggle:hover { color: #0A0C08; }
 .theme-toggle svg { flex-shrink: 0; }
 
 .top-bar .theme-toggle {
@@ -375,18 +436,9 @@ main {
 .sidebar-logo .logo-name {
   font-size: 19px;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
-.logo-name .l1  { color: var(--text); }
-.logo-name .l2  { color: var(--text); }
-.logo-name .l3  { color: var(--text); }
-.logo-name .l4  { color: var(--text); }
-.logo-name .l5  { color: var(--text); }
-.logo-name .l6  { color: var(--text); }
-.logo-name .l7  { color: var(--text); }
-.logo-name .l8  { color: var(--text); }
-.logo-name .l9  { color: var(--text); }
-.logo-name .l10 { color: var(--text); }
-.logo-name .l11 { color: var(--text); }
+.logo-name span { color: var(--text); }
 
 .logo-sep {
   color: var(--text);
@@ -543,6 +595,9 @@ main {
 }
 
 .proj-play-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -559,11 +614,38 @@ main {
   text-decoration: none;
   transition: color 0.25s, border-color 0.25s, background 0.25s;
 }
+.proj-play-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url('images/textures/acid-pattern.png');
+  background-repeat: repeat;
+  background-size: 56px 56px;
+  opacity: 0;
+  z-index: -1;
+  animation: acid-scroll 1.4s linear infinite;
+  animation-play-state: paused;
+  transition: opacity 0.25s ease;
+}
 .proj-play-btn:hover {
-  color: var(--bg);
-  background: var(--link);
+  color: #0A0C08;
+  background: var(--link); /* fallback fill if the texture fails to load */
   border-color: var(--link);
   text-decoration: none;
+}
+.proj-play-btn:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@keyframes acid-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: -56px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle::before,
+  .proj-play-btn::before { animation: none; }
 }
 
 .project-entry .project-text { display: flex; flex-direction: column; }
@@ -576,7 +658,7 @@ main {
   display: none;
   position: fixed;
   top: 0; right: 0; bottom: 0;
-  left: 270px;
+  left: 230px;
   z-index: 500;
   background: var(--bg);
   overflow-y: auto;
