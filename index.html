@@ -24,8 +24,8 @@
 <!-- MOBILE TOP BAR (sidebar collapses to this under 880px) -->
 <div class="top-bar">
   <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle light and dark theme">
-    <svg id="themeIconMobile" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    <span id="themeLabelMobile">Light</span>
+    <svg id="themeIconMobile" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <span class="sr-only" id="themeLabelMobile">Light</span>
   </button>
   <div class="logo-block">
     <div class="logo-name" onclick="navigateToSection('home')" style="cursor:pointer;" title="Go to Home">
@@ -73,8 +73,8 @@
     </nav>
 
     <button class="theme-toggle" id="themeToggleSidebar" aria-label="Toggle light and dark theme">
-      <svg id="themeIconSidebar" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      <span id="themeLabelSidebar">Light mode</span>
+      <svg id="themeIconSidebar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <span class="sr-only" id="themeLabelSidebar">Light mode</span>
     </button>
 
     <div class="sidebar-socials">
@@ -129,79 +129,83 @@
 
     <!-- GAMES -->
     <section id="games" class="content-section">
-      <h2 class="section-title">Games</h2>
-      <p class="portfolio-note">These are all spare time projects; click on any of the portfolio items for more details.</p>
+      <h2 class="section-title text-col">Games</h2>
+      <p class="portfolio-note text-col">These are all spare time projects; click on any of the portfolio items for more details.</p>
 
-      <!-- PROJECT 4 (flipped) -->
-      <div class="project-entry flip">
-        <a class="project-img" href="#" onclick="openDetail('project-4'); return false;">
-          <img src="images/Projects/STRUGGLE/struggle.png" alt="Struggle">
-        </a>
-        <div class="project-text">
-          <div class="project-text-title">
-            <h2 onclick="openDetail('project-4')">Struggle</h2>
-          </div>
-          <p>A TTRPG booklet that I helped create and design</p>
-          <p>The booklet explores themes of struggle and resilience in a fantasy setting.</p>
-          <a data-project="project-4" href="files/Quick Start Guide v001.pdf" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
-            <span>Play Game</span>
-          </a>
-        </div>
-      </div>
+      <div class="games-grid">
 
-      <!-- PROJECT 1 -->
-      <div class="project-entry">
-        <a class="project-img" href="#" onclick="openDetail('project-1'); return false;">
-          <img src="images/Projects/KINGS_SECRET/kıngs_secret.png" alt="King's Secret">
-        </a>
-        <div class="project-text">
-          <div class="project-text-title">
-            <h2 onclick="openDetail('project-1')">KING'S ROAD</h2>
-          </div>
-          <p>King's Road is a first person adventure game set in a medieval fantasy dungeon.</p>
-          <p>Games combat involve a inspration from undertale and dungeon crawl classics.</p>
-          <a data-project="project-1" href="https://eggzodiac.itch.io/kings-secret" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
-            <span>Play Game</span>
+        <!-- PROJECT 4 -->
+        <div class="project-entry">
+          <a class="project-img" href="#" onclick="openDetail('project-4'); return false;">
+            <img src="images/Projects/STRUGGLE/struggle.png" alt="Struggle">
           </a>
+          <div class="project-text">
+            <div class="project-text-title">
+              <h2 onclick="openDetail('project-4')">Struggle</h2>
+            </div>
+            <p>A TTRPG booklet that I helped create and design</p>
+            <p>The booklet explores themes of struggle and resilience in a fantasy setting.</p>
+            <a data-project="project-4" href="files/Quick Start Guide v001.pdf" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+              <span>Play Game</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <!-- PROJECT 2 (flipped) -->
-      <div class="project-entry flip">
-        <a class="project-img" href="#" onclick="openDetail('project-2'); return false;">
-          <img src="images/Projects/STARGAZE/main_wallpaper_star.jpg" alt="Stargaze">
-        </a>
-        <div class="project-text">
-          <div class="project-text-title">
-            <h2 onclick="openDetail('project-2')">STARGAZE</h2>
-          </div>
-          <p>Stargaze is a inspration from vampire survivors and my personal favorite game galaga.</p>
-          <p>The game combines fast-paced arcade action with strategic depth, offering a unique twist on the genre.</p>
-          <a data-project="project-2" href="https://eggzodiac.itch.io/stargaze" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
-            <span>Play Game</span>
+        <!-- PROJECT 1 -->
+        <div class="project-entry">
+          <a class="project-img" href="#" onclick="openDetail('project-1'); return false;">
+            <img src="images/Projects/KINGS_SECRET/kıngs_secret.png" alt="King's Secret">
           </a>
+          <div class="project-text">
+            <div class="project-text-title">
+              <h2 onclick="openDetail('project-1')">KING'S ROAD</h2>
+            </div>
+            <p>King's Road is a first person adventure game set in a medieval fantasy dungeon.</p>
+            <p>Games combat involve a inspration from undertale and dungeon crawl classics.</p>
+            <a data-project="project-1" href="https://eggzodiac.itch.io/kings-secret" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+              <span>Play Game</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <!-- PROJECT 3 -->
-      <div class="project-entry">
-        <a class="project-img" href="#" onclick="openDetail('project-3'); return false;">
-          <img src="images/Projects/DATAMON/datamon_wallp.jpg" alt="DATAMON">
-        </a>
-        <div class="project-text">
-          <div class="project-text-title">
-            <h2 onclick="openDetail('project-3')">DATAMON</h2>
-          </div>
-          <p>Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.</p>
-          <p>Datamon's are digital creatures that can be captured, trained, and battled in turn-based combat.</p>
-          <a data-project="project-3" href="https://eggzodiac.itch.io/datamon" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
-            <span>Play Game</span>
+        <!-- PROJECT 2 -->
+        <div class="project-entry">
+          <a class="project-img" href="#" onclick="openDetail('project-2'); return false;">
+            <img src="images/Projects/STARGAZE/main_wallpaper_star.jpg" alt="Stargaze">
           </a>
+          <div class="project-text">
+            <div class="project-text-title">
+              <h2 onclick="openDetail('project-2')">STARGAZE</h2>
+            </div>
+            <p>Stargaze is a inspration from vampire survivors and my personal favorite game galaga.</p>
+            <p>The game combines fast-paced arcade action with strategic depth, offering a unique twist on the genre.</p>
+            <a data-project="project-2" href="https://eggzodiac.itch.io/stargaze" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+              <span>Play Game</span>
+            </a>
+          </div>
         </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-entry">
+          <a class="project-img" href="#" onclick="openDetail('project-3'); return false;">
+            <img src="images/Projects/DATAMON/datamon_wallp.jpg" alt="DATAMON">
+          </a>
+          <div class="project-text">
+            <div class="project-text-title">
+              <h2 onclick="openDetail('project-3')">DATAMON</h2>
+            </div>
+            <p>Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.</p>
+            <p>Datamon's are digital creatures that can be captured, trained, and battled in turn-based combat.</p>
+            <a data-project="project-3" href="https://eggzodiac.itch.io/datamon" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+              <span>Play Game</span>
+            </a>
+          </div>
+        </div>
+
       </div>
 
       <!-- Pacman divider -->
@@ -212,8 +216,8 @@
 
     <!-- DESIGNS -->
     <section id="designs" class="content-section">
-      <h2 class="section-title">Designs</h2>
-      <p class="portfolio-note">A collection of experimental designs and visual explorations.</p>
+      <h2 class="section-title text-col">Designs</h2>
+      <p class="portfolio-note text-col">A collection of experimental designs and visual explorations.</p>
       <div class="thumb-grid" id="thumb-grid"></div>
 
       <!-- Pacman divider -->
