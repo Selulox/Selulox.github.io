@@ -107,7 +107,7 @@ a, button {
   to   { background-position: center, -230px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sidebar { animation: none; }
+  .sidebar, #games-flyout { animation: none; }
 }
 
 .sidebar-logo {
@@ -201,7 +201,14 @@ a, button {
   position: fixed;
   z-index: 600;
   width: 240px;
-  background: var(--acid-green);
+  /* same tinted, seamlessly-scrolling wave pattern as the sidebar */
+  background-image:
+    linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
+    url('images/acid_pattern.png');
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 230px auto;
+  background-position: center, 0 0;
+  animation: acid-scroll-x 10s linear infinite;
   border: 1px solid rgba(10, 12, 8, 0.25);
   box-shadow: 6px 6px 0 rgba(10, 12, 8, 0.18);
   padding: 8px;
@@ -641,6 +648,9 @@ main {
 }
 
 .proj-play-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -652,6 +662,32 @@ main {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
+}
+/* same tinted, scrolling wave pattern as the navbar/dropdown, but only
+   while hovering — sits on top of the solid acid-green fill and fades
+   in, rather than animating all the time */
+.proj-play-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
+    url('images/acid_pattern.png');
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 120px auto;
+  background-position: center, 0 0;
+  opacity: 0;
+  animation: acid-scroll-x 4s linear infinite;
+  animation-play-state: paused;
+  transition: opacity 0.2s ease;
+}
+.proj-play-btn:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+@media (prefers-reduced-motion: reduce) {
+  .proj-play-btn::before { animation: none; }
 }
 
 .project-entry .project-text {
