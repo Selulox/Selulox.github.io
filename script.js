@@ -13,6 +13,9 @@
   let theme = getSavedTheme() || 'light';
   root.setAttribute('data-theme', theme);
 
+  const SUN_ICON = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const MOON_ICON = '<path d="M20.5 13.4A8.5 8.5 0 1110.6 3.5a7 7 0 009.9 9.9z"/>';
+
   function updateToggleUI() {
     const isLight = theme === 'light';
     const sidebarLabel = document.getElementById('themeLabelSidebar');
@@ -21,7 +24,7 @@
     if (mobileLabel) mobileLabel.textContent = isLight ? 'Dark' : 'Light';
     [document.getElementById('themeIconSidebar'), document.getElementById('themeIconMobile')].forEach(icon => {
       if (!icon) return;
-      icon.style.opacity = isLight ? '0.9' : '1';
+      icon.innerHTML = isLight ? SUN_ICON : MOON_ICON;
     });
   }
 
@@ -547,11 +550,15 @@ function initPacmanStrip(canvasId) {
     pacX   += step * dir;
     ghostX += step * dir;
 
+    // Classic tunnel wrap: pac-man keeps moving in the same direction and
+    // re-enters from the opposite edge, instead of turning around, so the
+    // animation reads as continuing past the navbar / page edge rather than
+    // stopping there.
     if (dir === 1 && pacX > W + R * 3) {
-      dir = -1; pacX = W + R * 3; ghostX = pacX + GR * 4;
+      pacX = -R * 3; ghostX = pacX - GR * 4;
       dots.forEach(d => d.eaten = false);
     } else if (dir === -1 && pacX < -R * 3) {
-      dir = 1; pacX = -R * 3; ghostX = pacX - GR * 4;
+      pacX = W + R * 3; ghostX = pacX + GR * 4;
       dots.forEach(d => d.eaten = false);
     }
 

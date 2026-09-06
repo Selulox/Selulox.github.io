@@ -47,10 +47,17 @@ body
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.75;
+  cursor: url('images/cursor/acid-green-cursor-32.png') 4 4, auto;
 }
 
 a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--link-hover); text-decoration: underline; }
+
+/* Custom cursor also over links/buttons — the browser's own "pointer"
+   hand cursor would otherwise take over on anything clickable */
+a, button {
+  cursor: url('images/cursor/acid-green-cursor-32.png') 4 4, pointer;
+}
 
 /*
   SIDEBAR SHELL
@@ -331,10 +338,23 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   flex-shrink: 0;
   margin: auto auto 0;
   padding: 0;
-  cursor: pointer;
 }
-.sidebar .theme-toggle:hover { color: #0A0C08; }
 .theme-toggle svg { flex-shrink: 0; }
+
+/* Theme toggle button: white fill / black icon in light mode,
+   black fill / white icon in dark mode — regardless of the shared
+   acid-green fill the other buttons use. JS swaps the icon markup
+   itself between sun (light) and moon (dark). */
+:root[data-theme="light"] .theme-toggle,
+:root[data-theme="light"] .theme-toggle:hover {
+  background: #FFFFFF;
+  color: #0A0C08;
+}
+:root[data-theme="dark"] .theme-toggle,
+:root[data-theme="dark"] .theme-toggle:hover {
+  background: #0A0C08;
+  color: #FFFFFF;
+}
 
 .top-bar .theme-toggle {
   width: 38px;
@@ -368,7 +388,6 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 9px 16px;
-  cursor: pointer;
 }
 
 .mobile-nav {
@@ -531,8 +550,9 @@ main {
 /* Thumbnail grid */
 .thumb-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 3px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+  justify-content: center;
+  gap: 6px;
 }
 .thumb-grid a {
   display: block;
@@ -675,7 +695,6 @@ main {
   text-transform: uppercase;
   color: var(--link);
   background: none; border: none;
-  cursor: pointer;
   padding: 14px 0 10px;
   display: block;
 }
@@ -699,13 +718,8 @@ main {
   margin-bottom: 4px;
 }
 .pd-play-icon {
-  color: var(--muted);
-  text-decoration: none;
-  display: flex;
   flex-shrink: 0;
-  transition: color 0.3s;
 }
-.pd-play-icon:hover { color: var(--text); }
 .pd-image {
   width: 100%;
   overflow: hidden;
@@ -805,23 +819,22 @@ main {
 /* RESUME PAGE */
 .resume-wrap {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 32px;
-  align-items: stretch;
-  max-width: calc(var(--col) + 240px);
+  grid-template-columns: 110px 1fr;
+  gap: 24px;
+  align-items: start;
+  max-width: calc(var(--col) + 130px);
   margin: 0 auto;
 }
 .resume-img {
   display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 3/4;
   border: 1px solid var(--rule);
   background: #ccc;
   overflow: hidden;
 }
 .resume-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .resume-img-placeholder { width: 100%; height: 100%; background: linear-gradient(180deg, #1B2A3B, #243547); }
-.resume-text { display: flex; flex-direction: column; justify-content: center; }
 .resume-text p { font-size: 15px; color: var(--text); margin-bottom: 12px; line-height: 1.7; }
 
 .p1-social-icon {
@@ -883,12 +896,17 @@ main {
 .about-text { max-width: 640px; margin: 0 auto; }
 
 /* PACMAN STRIP */
+/* PACMAN STRIP — bleeds past main's side padding so it runs edge-to-edge,
+   from the sidebar all the way to the far side of the viewport. */
 .pacman-strip {
-  margin: 32px 0 0;
-  width: 100%;
+  margin: 32px -56px 0;
+  width: calc(100% + 112px);
   overflow: hidden;
   height: 32px;
   background: var(--bg);
+}
+@media (max-width: 880px) {
+  .pacman-strip { margin: 32px -20px 0; width: calc(100% + 40px); }
 }
 .pacman-strip canvas {
   display: block;
@@ -961,7 +979,6 @@ main {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 9px 22px;
-  cursor: pointer;
 }
 
 /* FOOTER */
@@ -976,9 +993,9 @@ footer {
 .footer-row { text-align: center; }
 
 @media (max-width: 600px) {
-  .thumb-grid { grid-template-columns: repeat(3, 1fr); }
+  .thumb-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 100px)); }
   .resume-wrap { grid-template-columns: 1fr; }
-  .resume-img { height: auto; aspect-ratio: 3/4; }
+  .resume-img { max-width: 140px; margin: 0 auto; }
   .about-wrap { grid-template-columns: 1fr; }
 }
 
@@ -1025,7 +1042,6 @@ footer {
   border: none;
   color: var(--muted);
   font-size: 22px;
-  cursor: pointer;
   line-height: 1;
   transition: color 0.2s;
   z-index: 901;
@@ -1040,7 +1056,6 @@ footer {
   border: none;
   color: var(--muted);
   font-size: 32px;
-  cursor: pointer;
   padding: 16px 20px;
   transition: color 0.2s;
   z-index: 901;
