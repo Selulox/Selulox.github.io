@@ -378,8 +378,37 @@ a, button {
   border-bottom: 1px solid var(--rule);
   position: sticky;
   top: 0;
-  background: var(--bg);
   z-index: 60;
+  /* same tinted, seamlessly-scrolling wave pattern as the sidebar */
+  background-image:
+    linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
+    url('images/acid_pattern.png');
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 230px auto;
+  background-position: center, 0 0;
+  animation: acid-scroll-x 10s linear infinite;
+  /* keep top-bar text black regardless of the site's light/dark theme,
+     same as the sidebar */
+  --text: #0A0C08;
+  --muted: #0A0C08;
+  --link: #0A0C08;
+  --link-hover: #0A0C08;
+  --rule: rgba(10, 12, 8, 0.25);
+  --bg: var(--acid-green);
+  --bg-inner: var(--acid-green);
+}
+@media (prefers-reduced-motion: reduce) {
+  .top-bar { animation: none; }
+}
+/* the menu button would otherwise blend into the top-bar's own
+   acid-green background, so invert it to black/green for contrast */
+.top-bar .menu-btn {
+  background: #0A0C08;
+  color: var(--acid-green);
+}
+.top-bar .menu-btn:hover {
+  background: #0A0C08;
+  color: var(--acid-green);
 }
 
 .logo-block {
