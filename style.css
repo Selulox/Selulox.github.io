@@ -53,8 +53,6 @@ body
 a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--link-hover); text-decoration: underline; }
 
-/* Custom cursor also over links/buttons — the browser's own "pointer"
-   hand cursor would otherwise take over on anything clickable */
 a, button {
   cursor: url('images/cursor/acid-green-cursor-32.png') 4 4, pointer;
 }
@@ -81,8 +79,6 @@ a, button {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* wave-pattern background, tinted so the black nav text stays readable;
-     repeats in both directions so it can scroll sideways in a seamless loop */
   background-image:
     linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
     url('images/acid_pattern.png');
@@ -90,15 +86,11 @@ a, button {
   background-size: cover, 230px auto;
   background-position: center, 0 0;
   animation: acid-scroll-x 10s linear infinite;
-  /* keep all sidebar text black regardless of the site's light/dark theme */
   --text: #0A0C08;
   --muted: #0A0C08;
   --link: #0A0C08;
   --link-hover: #0A0C08;
   --rule: rgba(10, 12, 8, 0.25);
-  /* the ghost logo's eyes are cut out using --bg/--bg-inner; point them at
-     the sidebar's own background instead of the theme background, or they
-     match the now-black ghost body and disappear in dark mode */
   --bg: var(--acid-green);
   --bg-inner: var(--acid-green);
 }
@@ -196,12 +188,11 @@ a, button {
   transform: translateY(-50%) translateX(3px);
 }
 
-/* GAMES SIDEWAYS FLYOUT — always acid-green, regardless of light/dark theme */
+/* GAMES SIDEWAYS FLYOUT */
 #games-flyout {
   position: fixed;
   z-index: 600;
   width: 240px;
-  /* same tinted, seamlessly-scrolling wave pattern as the sidebar */
   background-image:
     linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
     url('images/acid_pattern.png');
@@ -286,12 +277,7 @@ a, button {
   border: 0;
 }
 
-/* ============================================================
-   RETRO ARCADE BUTTONS — shared pixel-notch corners, chunky
-   offset shadow, and a "press down" hover/active interaction.
-   Applied to: theme toggle, mobile menu button, play buttons,
-   contact form submit.
-   ============================================================ */
+/* RETRO ARCADE BUTTONS */
 .theme-toggle,
 .menu-btn,
 .proj-play-btn,
@@ -348,10 +334,6 @@ a, button {
 }
 .theme-toggle svg { flex-shrink: 0; }
 
-/* Theme toggle button: white fill / black icon in light mode,
-   black fill / white icon in dark mode — regardless of the shared
-   acid-green fill the other buttons use. JS swaps the icon markup
-   itself between sun (light) and moon (dark). */
 :root[data-theme="light"] .theme-toggle,
 :root[data-theme="light"] .theme-toggle:hover {
   background: #FFFFFF;
@@ -369,7 +351,7 @@ a, button {
   margin: 0 12px 0 0;
 }
 
-/* MOBILE TOP BAR (replaces sidebar under 880px) */
+/* MOBILE TOP BAR */
 .top-bar {
   display: none;
   align-items: center;
@@ -379,7 +361,6 @@ a, button {
   position: sticky;
   top: 0;
   z-index: 60;
-  /* same tinted, seamlessly-scrolling wave pattern as the sidebar */
   background-image:
     linear-gradient(rgba(198, 255, 0, 0.72), rgba(198, 255, 0, 0.72)),
     url('images/acid_pattern.png');
@@ -387,8 +368,7 @@ a, button {
   background-size: cover, 230px auto;
   background-position: center, 0 0;
   animation: acid-scroll-x 10s linear infinite;
-  /* keep top-bar text black regardless of the site's light/dark theme,
-     same as the sidebar */
+
   --text: #0A0C08;
   --muted: #0A0C08;
   --link: #0A0C08;
@@ -400,8 +380,7 @@ a, button {
 @media (prefers-reduced-motion: reduce) {
   .top-bar { animation: none; }
 }
-/* the menu button would otherwise blend into the top-bar's own
-   acid-green background, so invert it to black/green for contrast */
+
 .top-bar .menu-btn {
   background: #0A0C08;
   color: var(--acid-green);
@@ -467,10 +446,6 @@ main {
   main { padding: 32px 20px 60px; }
 }
 
-/* Narrow, centered reading column for text-heavy content (headers, intros,
-   about/resume copy) — used inside a full-width main/section so prose stays
-   readable while other elements (pacman strip, game/design grids) can use
-   the full available width up to the sidebar. */
 .text-col {
   max-width: var(--col);
   margin: 0 auto;
@@ -618,7 +593,7 @@ main {
   text-align: center;
 }
 
-/* Games grid: 2 project cards per row, no separator lines between them */
+/* Games grid */
 .games-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -692,9 +667,7 @@ main {
   text-transform: uppercase;
   text-decoration: none;
 }
-/* same tinted, scrolling wave pattern as the navbar/dropdown, but only
-   while hovering — sits on top of the solid acid-green fill and fades
-   in, rather than animating all the time */
+
 .proj-play-btn::before {
   content: '';
   position: absolute;
@@ -961,8 +934,7 @@ main {
 .about-text { max-width: 640px; margin: 0 auto; }
 
 /* PACMAN STRIP */
-/* PACMAN STRIP — bleeds past main's side padding so it runs edge-to-edge,
-   from the sidebar all the way to the far side of the viewport. */
+
 .pacman-strip {
   margin: 32px -56px 0;
   width: calc(100% + 112px);
