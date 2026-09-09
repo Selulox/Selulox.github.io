@@ -1,3 +1,18 @@
+// Keep --mobile-header-h in sync with the real top-bar + dropdown height,
+// so the project detail overlay lines up under it instead of a guessed pixel value.
+function syncMobileHeaderHeight() {
+  const header = document.querySelector('.mobile-header');
+  if (!header || getComputedStyle(header).display === 'none') return;
+  const h = header.getBoundingClientRect().height;
+  if (h > 0) document.documentElement.style.setProperty('--mobile-header-h', h + 'px');
+}
+window.addEventListener('load', syncMobileHeaderHeight);
+window.addEventListener('resize', syncMobileHeaderHeight);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(syncMobileHeaderHeight);
+}
+syncMobileHeaderHeight();
+
 // Theme toggle (dark / light) with saved preference
 (function () {
   const STORAGE_KEY = 'site-theme';
@@ -190,12 +205,7 @@ and overpopulate, then the regulations are in order to fix the miscalculations..
   }
 };
 
-document.querySelectorAll('.proj-play-icon[data-project]').forEach(a => {
-  const p = projects[a.dataset.project];
-  if (p) a.href = p.link;
-});
-
-// Lightbox 
+// Lightbox
 let _lbImages = []; 
 let _lbIndex = 0;
 
@@ -568,4 +578,4 @@ function initPacmanStrip(canvasId) {
   requestAnimationFrame(frame);
 }
 
-['pacman-canvas', 'pacman-divider-games', 'pacman-divider-designs'].forEach(initPacmanStrip);
+['pacman-canvas', 'pacman-divider-designs'].forEach(initPacmanStrip);
