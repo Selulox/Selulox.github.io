@@ -107,16 +107,17 @@
 
     <!-- HOME -->
     <section id="home" class="content-section">
-      <div class="home-layout">
-        <div class="home-intro">
-          <h1>Hey there!</h1>
-          <p>And welcome to my little slice of the interwebs. I'm <strong>Oktay Sırmaçekici</strong> and as you've probably guessed from the title of this website, I'm a huge game design and programming enthusiast. In my spare time you'll frequently find me tinkering with games on different genres and platforms, figuring out new and interesting ways of doing things, and get the creative juices flowing with the development of small games. I enjoy working with people that share similar passions so feel free to <a href="#about">get in touch</a> with me if I can be of some help.</p>
-          <p>Below you'll find some of my (more experimental) projects I've been working on lately. You can find more detailed descriptions of several of my projects at the <a href="#games">games</a> page.</p>
-        </div>
-        <div class="about-photo-wrap">
-          <canvas id="orbit-canvas"></canvas>
-          <div class="about-photo-circle">
-            <img src="images/ME.png" alt="me">
+      <div class="home-hero-bg">
+        <div class="home-layout">
+          <div class="home-intro">
+            <h1><span class="hl">My name is Oktay Sırmaçekici, and I'm a Game &amp; Mechanics Designer.</span></h1>
+            <p class="home-subtitle"><span class="hl">Bachelor's degree in Mathematics with certificates in game and level design. Background spans TTRPGs, board games, and small experimental video game projects across a range of genres and platforms. Always looking to collaborate with people who share the same passion for games. <a href="#about">Get in touch</a> or check out the <a href="#games">games</a> page for more.</span></p>
+          </div>
+          <div class="about-photo-wrap">
+            <div class="about-photo-circle">
+              <img class="photo-dark" src="images/ME-border-black.png" alt="me">
+              <img class="photo-light" src="images/ME-border-white.png" alt="me">
+            </div>
           </div>
         </div>
       </div>
@@ -134,15 +135,16 @@
 
       <div class="games-rows">
 
-        <!-- ROW 1: STRUGGLE (purple wave bg) -->
-        <div class="project-row bg-wave">
+        <!-- ROW 1: STRUGGLE -->
+        <div class="project-row">
           <a class="project-row-img" href="#" onclick="openDetail('project-4'); return false;">
             <img src="images/Projects/banners/Strugglebackygames.png" alt="Struggle">
           </a>
           <div class="project-row-text">
-            <h2 onclick="openDetail('project-4')">Struggle</h2>
-            <p>A TTRPG booklet that I helped create and design</p>
-            <p>The booklet explores themes of struggle and resilience in a fantasy setting.</p>
+            <div class="hl-box">
+              <p>A TTRPG booklet that I helped create and design</p>
+              <p>The booklet explores themes of struggle and resilience in a fantasy setting.</p>
+            </div>
             <a data-project="project-4" href="files/Quick Start Guide v001.pdf" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
               <span>Play Game</span>
@@ -156,9 +158,10 @@
             <img src="images/Projects/banners/kingsroadbackygames.png" alt="King's Road">
           </a>
           <div class="project-row-text">
-            <h2 onclick="openDetail('project-1')">King's Road</h2>
-            <p>King's Road is a first person adventure game set in a medieval fantasy dungeon.</p>
-            <p>Games combat involve a inspration from undertale and dungeon crawl classics.</p>
+            <div class="hl-box">
+              <p>King's Road is a first person adventure game set in a medieval fantasy dungeon.</p>
+              <p>Games combat involve a inspration from undertale and dungeon crawl classics.</p>
+            </div>
             <a data-project="project-1" href="https://eggzodiac.itch.io/kings-secret" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
               <span>Play Game</span>
@@ -166,15 +169,16 @@
           </div>
         </div>
 
-        <!-- ROW 3: STARGAZE (purple wave bg) -->
-        <div class="project-row bg-wave">
+        <!-- ROW 3: STARGAZE -->
+        <div class="project-row">
           <a class="project-row-img" href="#" onclick="openDetail('project-2'); return false;">
             <img src="images/Projects/banners/Stargazebacky.png" alt="Stargaze">
           </a>
           <div class="project-row-text">
-            <h2 onclick="openDetail('project-2')">Stargaze</h2>
-            <p>Stargaze is a inspration from vampire survivors and my personal favorite game galaga.</p>
-            <p>The game combines fast-paced arcade action with strategic depth, offering a unique twist on the genre.</p>
+            <div class="hl-box">
+              <p>Stargaze is a inspration from vampire survivors and my personal favorite game galaga.</p>
+              <p>The game combines fast-paced arcade action with strategic depth, offering a unique twist on the genre.</p>
+            </div>
             <a data-project="project-2" href="https://eggzodiac.itch.io/stargaze" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
               <span>Play Game</span>
@@ -188,9 +192,10 @@
             <img src="images/Projects/banners/datamonbackygames.png" alt="Datamon">
           </a>
           <div class="project-row-text">
-            <h2 onclick="openDetail('project-3')">Datamon</h2>
-            <p>Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.</p>
-            <p>Datamon's are digital creatures that can be captured, trained, and battled in turn-based combat.</p>
+            <div class="hl-box">
+              <p>Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.</p>
+              <p>Datamon's are digital creatures that can be captured, trained, and battled in turn-based combat.</p>
+            </div>
             <a data-project="project-3" href="https://eggzodiac.itch.io/datamon" class="proj-play-btn" target="_blank" aria-label="Play / View Project" onclick="event.stopPropagation()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
               <span>Play Game</span>
@@ -210,7 +215,9 @@
     <section id="designs" class="content-section">
       <h2 class="section-title text-col">Designs</h2>
       <p class="portfolio-note text-col">A collection of experimental designs and visual explorations.</p>
-      <div class="thumb-grid" id="thumb-grid"></div>
+      <div class="designs-hero-bg">
+        <div class="thumb-grid" id="thumb-grid"></div>
+      </div>
 
       <!-- Pacman divider -->
       <div class="pacman-strip" aria-hidden="true">
@@ -221,10 +228,14 @@
     <!-- ABOUT -->
     <section id="about" class="content-section">
       <h2 class="section-title">About</h2>
-      <div class="about-text">
-        <p>Hi, seeing as you may or may not have reached this page by your own intent I'm probably obliged to tell you a bit more about myself.</p>
-        <p>My name is <strong>Oktay Sırmaçekici</strong> and as the title of this page suggests I'm a huge enthusiast when it comes to game design and development. My official papers suggest I managed to secure a Bachelor's degree in Mathematics, together with a multiple certifacetes of design and development of games. Unofficially, when the streets go dark, you'll often see me tinkering on low level game design and systems in things like D&D type TTRPG's and board games. Like most people in those fields, I love video games and films as the art form that they are: a brilliant composition of story, visuals, music, fx and I'd love to play a significant role in that in future endeavours.</p>
-        <p>Now, with passion of games and art, I've created this website to advertise my game design portfolio to see in whatever exciting and new direction this might take me. Feel free to reach out through any of the links below.</p>
+      <div class="about-wave-bg">
+        <div class="about-text">
+          <div class="hl-box">
+            <p>Hi, seeing as you may or may not have reached this page by your own intent I'm probably obliged to tell you a bit more about myself.</p>
+            <p>My name is <strong>Oktay Sırmaçekici</strong> and as the title of this page suggests I'm a huge enthusiast when it comes to game design and development. My official papers suggest I managed to secure a Bachelor's degree in Mathematics, together with a multiple certifacetes of design and development of games. Unofficially, when the streets go dark, you'll often see me tinkering on low level game design and systems in things like D&D type TTRPG's and board games. Like most people in those fields, I love video games and films as the art form that they are: a brilliant composition of story, visuals, music, fx and I'd love to play a significant role in that in future endeavours.</p>
+            <p>Now, with passion of games and art, I've created this website to advertise my game design portfolio to see in whatever exciting and new direction this might take me. Feel free to reach out through any of the links below.</p>
+          </div>
+        </div>
       </div>
     </section>
 
