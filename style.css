@@ -510,7 +510,7 @@ a, button {
     display: block;
     position: sticky;
     top: 0;
-    z-index: 60;
+    z-index: 550;
   }
   .top-bar { display: flex; }
   body { font-size: 15px; }
