@@ -757,88 +757,146 @@ main {
 @media (max-width: 880px) {
   .pd-inner { padding: 0 20px 60px; }
 }
-.pd-back {
-  font-family: var(--font-ui);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--link);
-  background: none; border: none;
-  padding: 14px 0 10px;
+.pd-title-hl {
   display: block;
-}
-.pd-back:hover { color: var(--link-hover); }
-
-.pd-header {
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.pd-header h1 {
+  width: fit-content;
+  margin: 28px auto 28px;
   font-family: var(--font-head);
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--accent-r);
-  margin-bottom: 4px;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #0A0C08;
+  background: var(--acid-green-bright);
+  border: 2px solid #0A0C08;
+  border-radius: 3px;
+  padding: 16px 40px;
+  box-shadow: 3px 3px 0 rgba(10, 12, 8, 0.35);
 }
-.pd-play-icon {
-  flex-shrink: 0;
+@media (max-width: 700px) {
+  .pd-title-hl { font-size: 21px; padding: 12px 20px; margin: 18px auto 22px; }
 }
+
+/* When the title image is paired with the stat/meta box (.pd-hero-meta-wrap:
+   1fr photo column + 260px meta column + 20px gap), the photo itself only
+   occupies the left column — its visual center sits 140px left of the full
+   content area's center (half of the 260px + 20px it's sharing the row
+   with). Shift the title and the intro pull-quote by that same fixed
+   amount so they read as centered against the photo, not the whole row.
+   Only applied once the content area is wide enough (~1050px+) that the
+   shift can't push either box past the left edge. */
+@media (min-width: 1050px) {
+  .pd-inner:has(> #pd-content > .pd-hero-meta-wrap:first-child) > .pd-title-hl,
+  .pd-inner:has(> #pd-content > .pd-hero-meta-wrap:first-child) #pd-content > .pd-quote {
+    transform: translateX(-140px);
+  }
+}
+
+/* Back / Play buttons live in the navbar (sidebar + mobile menu) and only
+   appear while the project detail overlay is open. Selectors below are
+   scoped to .side-nav / .mobile-nav so they out-specificity the base
+   ".side-nav .nav-item" / ".mobile-nav .nav-item" display rules and
+   actually stay hidden when the detail overlay is closed. */
+.side-nav .nav-item.pd-nav-item,
+.mobile-nav .nav-item.pd-nav-item {
+  display: none;
+  gap: 8px;
+  width: 190px;
+  max-width: none;
+  box-sizing: border-box;
+}
+body.pd-open .side-nav .nav-item.pd-nav-item,
+body.pd-open .mobile-nav .nav-item.pd-nav-item {
+  display: inline-flex;
+}
+/* Space instead of a divider line: a bit of extra room below "Back to
+   Page", which is now the last of the two added buttons, sitting right
+   above "Home". */
+.side-nav .nav-item.pd-nav-item.pd-nav-last,
+.mobile-nav .nav-item.pd-nav-item.pd-nav-last {
+  margin-bottom: 10px;
+}
+.mobile-nav .nav-item.pd-nav-item { width: 100%; }
 .pd-image {
   width: 100%;
   overflow: hidden;
   background: var(--bg-inner);
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
-.pd-image img { width: 100%; display: block; object-fit: cover; }
+.pd-image img { width: 100%; height: auto; max-height: 420px; display: block; object-fit: cover; }
 .pd-image-placeholder { width: 100%; aspect-ratio: 16/7; background: linear-gradient(135deg, #1B2A3B, #243547); }
+
+/* Two standalone images side by side (auto-paired), shorter overall page */
+.pd-image-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.pd-image-cell {
+  overflow: hidden;
+  background: var(--bg-inner);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pd-image-cell img {
+  width: 100%;
+  height: 260px;
+  display: block;
+  object-fit: cover;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
 
 /* Freeform content */
 .pd-content { }
 
 .pd-block-hero {
   width: 100%;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 .pd-block-hero img {
   width: 100%;
   height: auto;
+  max-height: 440px;
   display: block;
+  object-fit: cover;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
 
 .pd-block-row {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 .pd-block-row-duo {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.7fr;
-  gap: 16px;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  gap: 14px;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 .pd-block-img {
   width: 100%;
+  height: 260px;
   overflow: hidden;
   background: var(--bg-inner);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .pd-block-img img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
@@ -849,10 +907,10 @@ main {
   justify-content: center;
 }
 .pd-block-text p {
-  font-size: 20px;
+  font-size: 17px;
   color: var(--text);
-  line-height: 1.8;
-  margin-bottom: 12px;
+  line-height: 1.7;
+  margin-bottom: 10px;
 }
 .pd-block-text p:last-child { margin-bottom: 0; }
 .pd-block-text p strong { color: var(--accent-r); }
@@ -869,23 +927,185 @@ main {
 /* Long-form passages */
 .pd-block-longtext {
   max-width: var(--col);
-  margin: 0 auto 32px;
+  margin: 0 auto 22px;
 }
 .pd-block-longtext p {
   font-size: 14px;
   color: var(--text);
-  line-height: 1.85;
-  margin-bottom: 16px;
+  line-height: 1.8;
+  margin-bottom: 14px;
 }
 .pd-block-longtext p:last-child { margin-bottom: 0; }
 .pd-block-longtext p strong { color: var(--accent-r); }
 .pd-block-longtext p em { color: var(--text); }
 
+/* Stat / meta info grid (Role, Tools, Team, Duration, etc.) — yellow highlight box */
+.pd-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 14px 20px;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  background: var(--acid-green-bright);
+  color: #0A0C08;
+  border: 2px solid #0A0C08;
+  border-radius: 3px;
+  padding: 18px 20px;
+  box-shadow: 3px 3px 0 rgba(10, 12, 8, 0.35);
+}
+.pd-meta-item { min-width: 0; text-align: center; }
+.pd-meta-label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3D4A22;
+  margin-bottom: 5px;
+}
+.pd-meta-value {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #0A0C08;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+/* Hero/first image paired with the meta box, side by side — image left, stat box right */
+.pd-hero-meta-wrap {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 24px;
+}
+.pd-hero-meta-wrap .pd-block-hero,
+.pd-hero-meta-wrap .pd-image { margin-bottom: 0; }
+.pd-hero-meta-wrap .pd-meta {
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+@media (max-width: 700px) {
+  .pd-hero-meta-wrap { grid-template-columns: 1fr; }
+}
+
+/* Section headings that break the page into named chunks */
+.pd-heading {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-r);
+  margin: 34px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.pd-heading:first-child { margin-top: 0; }
+
+/* Heading-delimited sections (Level Design, World & Lore, etc.) laid out
+   two per row instead of stacking each one full-width down the page.
+   This uses two independent flex columns (instead of a CSS grid with
+   shared row tracks) so a tall section in one column — e.g. a "Catch &
+   Battle" section with several stacked images — doesn't stretch the row
+   height for its shorter neighbour and leave a gap before the next
+   section in that neighbour's column. Each column simply stacks its own
+   sections top to bottom at their natural height. */
+.pd-sections-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+.pd-sections-col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pd-section { min-width: 0; }
+/* Half-width columns are tight, so keep each section's own image+text
+   rows stacked (image above text) instead of side by side. */
+.pd-section .pd-block-row,
+.pd-section .pd-block-row-duo {
+  grid-template-columns: 1fr;
+}
+@media (max-width: 700px) {
+  .pd-sections-grid { flex-direction: column; gap: 0; }
+  .pd-sections-col { gap: 0; }
+}
+
+/* Pull-quote style intro/summary passage — yellow highlight box */
+.pd-quote {
+  max-width: var(--col);
+  margin: 0 auto 22px;
+  background: var(--acid-green-bright);
+  color: #0A0C08;
+  border: 2px solid #0A0C08;
+  border-radius: 2px;
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Bulleted lists (key learnings, contributions, details) */
+.pd-bullets {
+  max-width: var(--col);
+  margin: 0 auto 22px;
+  list-style: none;
+}
+.pd-bullets li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+.pd-bullets li:last-child { margin-bottom: 0; }
+.pd-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 7px;
+  height: 7px;
+  background: var(--accent-r);
+}
+.pd-bullets li strong { color: var(--accent-r); }
+
+/* Screenshot / image gallery grid */
+.pd-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.pd-gallery .pd-block-img { margin: 0; height: 180px; }
+
 @media (max-width: 600px) {
   .pd-block-row,
-  .pd-block-row-duo { grid-template-columns: 1fr; }
-  .pd-header h1 { font-size: 21px; }
-  .pd-block-text p { font-size: 17px; }
+  .pd-block-row-duo,
+  .pd-image-row { grid-template-columns: 1fr; }
+  .pd-block-text p { font-size: 16px; }
+  .pd-block-img { height: 220px; }
+  .pd-image-cell img { height: 220px; }
+  .pd-meta { grid-template-columns: repeat(2, 1fr); gap: 14px 18px; padding: 16px; }
+  .pd-heading { font-size: 11px; margin: 28px 0 12px; }
+  .pd-quote { font-size: 15px; padding: 14px 16px; }
+  .pd-gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .pd-gallery .pd-block-img { height: 140px; }
 }
 
 .p1-social-icon {

@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<!-- MOBILE HEADER (top bar + dropdown menu, stick together as one unit) -->
+<!-- MOBILE HEADER -->
 <div class="mobile-header">
   <div class="top-bar">
     <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle light and dark theme">
@@ -47,6 +47,14 @@
 
   <!-- MOBILE NAV -->
   <nav class="mobile-nav" id="mobileNav">
+    <a href="#" class="nav-item pd-nav-item pd-link-target" target="_blank" aria-label="Play / View Project">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+      <span>Play Game</span>
+    </a>
+    <button class="nav-item pd-nav-item pd-nav-last" onclick="closeDetail()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+      <span>Back to Page</span>
+    </button>
     <a class="nav-item active" data-section="home" href="#home" onclick="navigateToSection('home'); return false;">Home</a>
     <a class="nav-item" data-section="games" href="#games" onclick="navigateToSection('games'); return false;">Games</a>
     <a class="nav-item" data-section="designs" href="#designs" onclick="navigateToSection('designs'); return false;">Designs</a>
@@ -89,6 +97,14 @@
     <div class="sidebar-tagline">Game<span class="pipe">&nbsp;&amp;&nbsp;</span>Mechanics Designer</div>
 
     <nav class="side-nav">
+      <a href="#" class="nav-item pd-nav-item pd-link-target" target="_blank" aria-label="Play / View Project">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+        <span>Play Game</span>
+      </a>
+      <button class="nav-item pd-nav-item pd-nav-last" onclick="closeDetail()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+        <span>Back to Page</span>
+      </button>
       <a class="nav-item active" data-section="home" href="#home" onclick="navigateToSection('home'); return false;">Home</a>
       <a class="nav-item has-flyout" data-section="games" href="#games" onclick="navigateToSection('games'); return false;">Games<span class="flyout-chevron" aria-hidden="true">›</span></a>
       <a class="nav-item" data-section="designs" href="#designs" onclick="navigateToSection('designs'); return false;">Designs</a>
@@ -271,18 +287,7 @@
 <div id="project-detail">
   <div class="pd-inner">
 
-    <button class="pd-back" onclick="closeDetail()">← Back to Games</button>
-
-    <div class="pd-header">
-      <h1 id="pd-title">Project Title</h1>
-      <a href="#" id="pd-link" class="pd-play-icon proj-play-btn" target="_blank" aria-label="Play / View Project">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
-        </svg>
-        <span>Play Game</span>
-      </a>
-    </div>
+    <h1 id="pd-title" class="pd-title-hl">Project Title</h1>
 
     <div class="pd-content" id="pd-content">
       <!-- Images and text injected by JS per project -->

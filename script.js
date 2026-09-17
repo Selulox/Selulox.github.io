@@ -88,18 +88,46 @@ function themeColor(varName, fallback) {
 const projects =
 {
   'project-1': {
-    title: 'KING\'S SECRET',
+    title: 'KING\'S ROAD',
     link: 'https://eggzodiac.itch.io/kings-secret',
     content: [
       { type: 'image', src: 'images/Projects/KINGS_SECRET/kıngs_secret.png' },
-      { type: 'image', src: 'images/Projects/KINGS_SECRET/Kings_road_gamplay.gif',},
+      { type: 'meta', items: [
+        { label: 'Genre',        value: 'Adventure / Dungeon Crawler' },
+        { label: 'Platform',     value: 'PC' },
+        { label: 'Tools Used',   value: 'GODOT' },
+        { label: 'Production Time', value: '48 Hours' },
+        { label: 'Team Size',    value: '4' },
+        { label: 'Role',         value: 'Level Designer' },
+      ]},
+      { type: 'quote', text: 'King\'s Road is a first-person adventure through a medieval fantasy dungeon, drawing its combat rhythm from Undertale and its exploration from classic dungeon crawlers.' },
+
+      { type: 'heading', text: 'Key Features' },
+      { type: 'bullets', items: [
+        'First-person exploration through a hand-laid-out medieval fantasy dungeon',
+        'Undertale-inspired turn-based combat encounters',
+        'Full inventory system with item and resource management',
+        'Room-by-room encounter pacing built for a game jam timeframe',
+      ]},
+
+      { type: 'heading', text: 'My Contribution' },
+      { type: 'bullets', items: [
+        'Designed and blocked out the dungeon level layout',
+        'Balanced the item and resource economy for the inventory system',
+        'Adapted Undertale-style combat encounters to fit the dungeon setting',
+      ]},
+
+      { type: 'heading', text: 'Level Design' },
+      { type: 'image', src: 'images/Projects/KINGS_SECRET/Kings_road_gamplay.gif' },
       { type: 'row',
         src: 'images/Projects/KINGS_SECRET/Kings_road_map.png',
-        text: 'This was university gamejam project. I did the level design of the game.' },
+        text: 'This was a university game jam project. I did the level design of the game, laying out the dungeon\'s rooms, encounters and pacing.' },
+
+      { type: 'heading', text: 'Combat & Systems' },
       { type: 'duo',
         srcLeft: 'images/Projects/KINGS_SECRET/combat.jpg',
         src: 'images/Projects/KINGS_SECRET/inventory.jpg',
-        text: 'We implemented a comprehensive inventory system for the game and managed the balance of items and resources also made a combat system from undertale.' },
+        text: 'We implemented a comprehensive inventory system for the game and managed the balance of items and resources, alongside a combat system inspired by Undertale.' },
     ]
   },
 
@@ -108,16 +136,46 @@ const projects =
     link: 'https://eggzodiac.itch.io/stargaze',
     content: [
       { type: 'image', src: 'images/Projects/STARGAZE/main_wallpaper_star.jpg' },
+      { type: 'meta', items: [
+        { label: 'Genre',        value: 'Arcade Shoot-\'Em-Up' },
+        { label: 'Platform',     value: 'PC' },
+        { label: 'Tools Used',   value: 'GODOT' },
+        { label: 'Production Time', value: '1 Weeks' },
+        { label: 'Team Size',    value: '1' },
+        { label: 'Role',         value: 'Game Designer' },
+      ]},
+      { type: 'quote', text: 'Stargaze fuses the swarming chaos of Vampire Survivors with the disciplined dodge-and-shoot rhythm of Galaga.' },
+
+      { type: 'heading', text: 'Key Features' },
+      { type: 'bullets', items: [
+        'Fast-paced arcade shoot-\'em-up blending Galaga-style dodging with Vampire Survivors-style swarms',
+        'Score-based upgrade system for unlocking new ship abilities',
+        'Custom visual effects tuned for impact and player feedback',
+        'Balanced enemy spawn waves for escalating difficulty',
+      ]},
+
+      { type: 'heading', text: 'My Contribution' },
+      { type: 'bullets', items: [
+        'Designed the score-based upgrade and progression loop',
+        'Implemented visual effects to sell impact and player feedback',
+        'Balanced enemy spawn waves for pacing',
+      ]},
+
+      { type: 'heading', text: 'Gameplay' },
       { type: 'row',
         src: 'images/Projects/STARGAZE/stargaze_gameplay.gif',
-        text: 'Stargaze is a game combining elements from galaga and vampire survivors.' },
+        text: 'Stargaze is a game combining elements from Galaga and Vampire Survivors — fast-paced arcade action with strategic depth.' },
+
+      { type: 'heading', text: 'Progression' },
       { type: 'row',
         src: 'images/Projects/STARGAZE/star_gaze_upgrade.jpg',
         text: 'When the player reaches a certain score, they can unlock new upgrades for their ship.' },
+
+      { type: 'heading', text: 'Visual Effects' },
       { type: 'duo',
         srcLeft: 'images/Projects/STARGAZE/Effects_2.gif',
         src: 'images/Projects/STARGAZE/star_gaze_effects_1.jpg',
-        text: 'I have implemented visual effects for the game, enhancing the overall aesthetic and player experience.' },
+        text: 'I implemented the visual effects for the game, enhancing the overall aesthetic and player feedback.' },
     ]
   },
 
@@ -126,10 +184,36 @@ const projects =
     link: 'https://eggzodiac.itch.io/datamon',
     content: [
       { type: 'hero', src: 'images/Projects/DATAMON/datamon_wallp.jpg', text: 'Welcome to DATAMON! This is a retro-style RPG inspired by classic Pokémon games.' },
+      { type: 'meta', items: [
+        { label: 'Genre',        value: 'Turn-Based RPG' },
+        { label: 'Platform',     value: 'PC' },
+        { label: 'Tools Used',   value: 'UNITY' },
+        { label: 'Production Time', value: '2 Weeks' },
+        { label: 'Team Size',    value: '1' },
+        { label: 'Role',         value: 'Game Designer' },
+      ]},
+      { type: 'quote', text: 'Welcome to DATAMON — a retro-style RPG that reimagines the classic Pokémon formula with its own systems for stats, status effects and route design.' },
 
+      { type: 'heading', text: 'Key Features' },
+      { type: 'bullets', items: [
+        'Turn-based battle system with status effects — debuff, bleed and stress',
+        'Party management with swappable team composition',
+        'Shop economy and inventory system',
+        'Overworld routes with per-route encounter pools',
+      ]},
+
+      { type: 'heading', text: 'My Contribution' },
+      { type: 'bullets', items: [
+        'Designed and implemented the turn-based battle system and its status effects',
+        'Built the party management and team-swap system',
+        'Designed the shop economy and inventory system',
+        'Designed the overworld routes and their per-route encounter pools',
+      ]},
+
+      { type: 'heading', text: 'Catch & Battle' },
       { type: 'row',
         src: 'images/Projects/DATAMON/datanob.gif',
-        text: 'In Datamon, you can catch, use potions and battle with datamons.' },
+        text: 'In Datamon, you can catch, use potions and battle with Datamons.' },
 
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/battle.jpg',
@@ -141,11 +225,7 @@ const projects =
         src: 'images/Projects/DATAMON/move1.jpg',
         text: 'Each Pokémon has a set of moves. The left panel shows the move list; you can debuff, bleed or even stress the opponent.' },
 
-      { type: 'duo',
-        srcLeft: 'images/Projects/DATAMON/pokemon.jpg',
-        src: 'images/Projects/DATAMON/part.jpg',
-        text: 'I have written a script to manage pokemons in a data level. Manage your party between battles. Swap members, check stats, and plan your team composition.' },
-
+      { type: 'heading', text: 'Shop & Inventory' },
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/shopstock.jpg',
         src: 'images/Projects/DATAMON/shop_list.jpg',
@@ -155,6 +235,13 @@ const projects =
         src: 'images/Projects/DATAMON/inventory.jpg',
         text: 'Your inventory keeps track of everything you carry — potions, balls, and key items.' },
 
+      { type: 'heading', text: 'Party Management' },
+      { type: 'duo',
+        srcLeft: 'images/Projects/DATAMON/pokemon.jpg',
+        src: 'images/Projects/DATAMON/part.jpg',
+        text: 'I have written a script to manage Pokémon at a data level. Manage your party between battles — swap members, check stats, and plan your team composition.' },
+
+      { type: 'heading', text: 'World & Routes' },
       { type: 'duo',
         srcLeft: 'images/Projects/DATAMON/routes1.jpg',
         src:     'images/Projects/DATAMON/route.jpg',
@@ -167,7 +254,33 @@ const projects =
     link: 'files/Quick Start Guide v001.pdf',
     content: [
       { type: 'image', src: 'images/Projects/STRUGGLE/ss.png' },
-      { type: 'text',  body: 'A TTRPG booklet that I helped create and design. Struggle is a concept we came up with to explore themes of resilience and perseverance in a fantasy setting in extreme situations. Below is a preview of some of the story of the world.' },
+      { type: 'meta', items: [
+        { label: 'Genre',        value: 'TTRPG Booklet' },
+        { label: 'Format',       value: 'Print / PDF' },
+        { label: 'Tools Used',   value: 'STRUGGLE / LIBRE OFFICE / DICE' },
+        { label: 'Production Time', value: '2 Months' },
+        { label: 'Team Size',    value: '3' },
+        { label: 'Role',         value: 'Game Designer' },
+      ]},
+      { type: 'quote', text: 'A souls-like TTRPG campaign exploring themes of struggle and resilience in a brutal fantasy world under occupation. A TTRPG booklet that I helped create and design. Struggle is a concept we came up with to explore themes of resilience and perseverance in a fantasy setting in extreme situations. Below is a preview of some of the story of the world.' },
+
+      { type: 'heading', text: 'Key Features' },
+      { type: 'bullets', items: [
+        'Souls-like TTRPG campaign set in a brutal fantasy world under occupation',
+        'Original equipment list and character creation rules',
+        'Balanced class system with distinct playstyles',
+        'Print-ready character sheet for tracking stats and progress',
+      ]},
+
+      { type: 'heading', text: 'My Contribution' },
+      { type: 'bullets', items: [
+        'Co-designed and wrote the booklet\'s setting and lore',
+        'Designed the equipment list and character creation rules',
+        'Designed and balanced the character classes',
+        'Laid out the character sheet',
+      ]},
+
+      { type: 'heading', text: 'World & Lore' },
       { type: 'longtext', body: `
 <strong>LAND OF WAR/DÂR’ÜL-HARB</strong>
 
@@ -194,11 +307,16 @@ and survive.
 But in some cases where women breed more, man are healthier by some blind luck and they
 somehow manage to “thrive”, it raises some questions in the ranks of neme. If some If they are to live
 and overpopulate, then the regulations are in order to fix the miscalculations..` },
+      { type: 'heading', text: 'Equipment & Character Creation' },
       { type: 'duo', 
         srcLeft: 'images/Projects/STRUGGLE/equipment.png',
         src: 'images/Projects/STRUGGLE/charter.png', 
         text: 'The booklet includes detailed information about the equipment available in the game and character creation elements.' },
+
+      { type: 'heading', text: 'Classes' },
       { type: 'row', src: 'images/Projects/STRUGGLE/class.png', text: 'The booklet also features detailed information about the different character classes available in the game and their descriptions.' },
+
+      { type: 'heading', text: 'Character Sheet' },
       { type: 'image', src: 'images/Projects/STRUGGLE/the struggle character sheet v001.png' },
       { type: 'text',  body: 'Our run of the mill character sheet for the Struggle booklet.' },
     ]
@@ -322,7 +440,8 @@ function openDetail(id) {
   const p = projects[id];
   if (!p) return;
   document.getElementById('pd-title').textContent = p.title;
-  document.getElementById('pd-link').href = p.link;
+  document.querySelectorAll('.pd-link-target').forEach(a => a.href = p.link);
+  document.body.classList.add('pd-open');
 
   const container = document.getElementById('pd-content');
 
@@ -335,6 +454,7 @@ function openDetail(id) {
       if (block.src) allSrcs.push(block.src);
     }
     if (block.type === 'image' && block.src) allSrcs.push(block.src);
+    if (block.type === 'gallery' && block.srcs) block.srcs.forEach(s => allSrcs.push(s));
   });
 
   function renderParagraphs(body) {
@@ -351,7 +471,7 @@ function openDetail(id) {
     return `<img src="${src}" alt="" class="lb-trigger" data-srcs='${safeJson}' data-idx="${idx}" title="Click to enlarge">`;
   }
 
-  container.innerHTML = p.content.map(block => {
+  function renderBlock(block) {
     if (block.type === 'hero') {
       return `<div class="pd-block-hero">${imgTag(block.src, allSrcs)}</div>`;
     }
@@ -377,10 +497,116 @@ function openDetail(id) {
 
       return `<div class="pd-block-longtext">${renderParagraphs(block.body)}</div>`;
     }
+    else if (block.type === 'meta') {
+      // Stat grid, e.g. Role / Tools / Team Size / Duration
+      const items = (block.items || []).map(it =>
+        `<div class="pd-meta-item"><span class="pd-meta-label">${it.label}</span><span class="pd-meta-value">${it.value}</span></div>`
+      ).join('');
+      return `<div class="pd-meta">${items}</div>`;
+    }
+    else if (block.type === 'heading') {
+      return `<h3 class="pd-heading">${block.text}</h3>`;
+    }
+    else if (block.type === 'quote') {
+      return `<div class="pd-quote">${block.text}</div>`;
+    }
+    else if (block.type === 'bullets') {
+      const lis = (block.items || []).map(i => `<li>${i}</li>`).join('');
+      return `<ul class="pd-bullets">${lis}</ul>`;
+    }
+    else if (block.type === 'gallery') {
+      const imgs = (block.srcs || []).map(s => `<div class="pd-block-img">${imgTag(s, allSrcs)}</div>`).join('');
+      return `<div class="pd-gallery">${imgs}</div>`;
+    }
     else {
       return renderParagraphs(block.body);
     }
-  }).join('');
+  }
+
+  // Walk a list of content blocks, auto-pairing consecutive standalone
+  // 'image' blocks into a compact 2-up row, and pairing a leading hero/image
+  // with an immediately-following stat box — keeps the page shorter without
+  // losing any images. Used both for the intro blocks and for each
+  // heading-delimited section below.
+  function renderRun(blocks) {
+    let out = '';
+    let i = 0;
+    while (i < blocks.length) {
+      const block = blocks[i];
+      const next = blocks[i + 1];
+
+      if ((block.type === 'hero' || block.type === 'image') && next && next.type === 'meta') {
+        const mediaHtml = block.type === 'hero'
+          ? `<div class="pd-block-hero">${imgTag(block.src, allSrcs)}</div>`
+          : (block.src ? `<div class="pd-image">${imgTag(block.src, allSrcs)}</div>` : `<div class="pd-image"><div class="pd-image-placeholder"></div></div>`);
+        out += `<div class="pd-hero-meta-wrap">${mediaHtml}${renderBlock(next)}</div>`;
+        i += 2;
+        continue;
+      }
+
+      if (block.type === 'image') {
+        let j = i;
+        const run = [];
+        while (j < blocks.length && blocks[j].type === 'image') { run.push(blocks[j]); j++; }
+        let k = 0;
+        while (k < run.length) {
+          if (k + 1 < run.length) {
+            out += `<div class="pd-image-row">
+              <div class="pd-image-cell">${imgTag(run[k].src, allSrcs)}</div>
+              <div class="pd-image-cell">${imgTag(run[k + 1].src, allSrcs)}</div>
+            </div>`;
+            k += 2;
+          } else {
+            out += renderBlock(run[k]);
+            k += 1;
+          }
+        }
+        i = j;
+      } else {
+        out += renderBlock(block);
+        i++;
+      }
+    }
+    return out;
+  }
+
+  // Everything before the first heading (hero image, stat box, intro quote
+  // and text) renders full-width as before.
+  const firstHeadingIdx = p.content.findIndex(b => b.type === 'heading');
+  const introBlocks = firstHeadingIdx === -1 ? p.content : p.content.slice(0, firstHeadingIdx);
+  let html = renderRun(introBlocks);
+
+  // Everything from the first heading onward is split into
+  // heading-delimited sections ("Level Design", "World & Lore", etc.) and
+  // laid out two per row instead of stacking each one full-width down the
+  // page.
+  if (firstHeadingIdx !== -1) {
+    const rest = p.content.slice(firstHeadingIdx);
+    const sections = [];
+    let current = null;
+    rest.forEach(block => {
+      if (block.type === 'heading') {
+        if (current) sections.push(current);
+        current = [block];
+      } else if (current) {
+        current.push(block);
+      }
+    });
+    if (current) sections.push(current);
+
+    // Split sections into two independent columns (left gets sections
+    // 0, 2, 4…, right gets 1, 3, 5…) so each column stacks its own
+    // sections at their natural height instead of both columns being
+    // locked to shared grid row heights — see .pd-sections-grid in
+    // style.css for why that matters.
+    const leftHtml = sections.filter((_, i) => i % 2 === 0)
+      .map(sec => `<div class="pd-section">${renderRun(sec)}</div>`).join('');
+    const rightHtml = sections.filter((_, i) => i % 2 === 1)
+      .map(sec => `<div class="pd-section">${renderRun(sec)}</div>`).join('');
+    html += `<div class="pd-sections-grid"><div class="pd-sections-col">${leftHtml}</div><div class="pd-sections-col">${rightHtml}</div></div>`;
+  }
+
+  container.innerHTML = html;
 
   container.querySelectorAll('.lb-trigger').forEach(img => {
     img.addEventListener('click', () => {
@@ -398,6 +624,7 @@ function openDetail(id) {
 
 function closeDetail(targetSection) {
   document.getElementById('project-detail').classList.remove('active');
+  document.body.classList.remove('pd-open');
   document.body.style.overflow = ''; // restore normal page scrolling
   if (targetSection) {
     const el = document.getElementById(targetSection);
