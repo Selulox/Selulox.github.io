@@ -1,5 +1,3 @@
-// Keep --mobile-header-h in sync with the real top-bar + dropdown height,
-// so the project detail overlay lines up under it instead of a guessed pixel value.
 function syncMobileHeaderHeight() {
   const header = document.querySelector('.mobile-header');
   if (!header || getComputedStyle(header).display === 'none') return;
@@ -13,7 +11,7 @@ if (document.fonts && document.fonts.ready) {
 }
 syncMobileHeaderHeight();
 
-// Theme toggle (dark / light) with saved preference
+// Theme toggle with saved preference
 (function () {
   const STORAGE_KEY = 'site-theme';
   const root = document.documentElement;
@@ -523,11 +521,6 @@ function openDetail(id) {
     }
   }
 
-  // Walk a list of content blocks, auto-pairing consecutive standalone
-  // 'image' blocks into a compact 2-up row, and pairing a leading hero/image
-  // with an immediately-following stat box — keeps the page shorter without
-  // losing any images. Used both for the intro blocks and for each
-  // heading-delimited section below.
   function renderRun(blocks) {
     let out = '';
     let i = 0;
@@ -570,16 +563,10 @@ function openDetail(id) {
     return out;
   }
 
-  // Everything before the first heading (hero image, stat box, intro quote
-  // and text) renders full-width as before.
   const firstHeadingIdx = p.content.findIndex(b => b.type === 'heading');
   const introBlocks = firstHeadingIdx === -1 ? p.content : p.content.slice(0, firstHeadingIdx);
   let html = renderRun(introBlocks);
 
-  // Everything from the first heading onward is split into
-  // heading-delimited sections ("Level Design", "World & Lore", etc.) and
-  // laid out two per row instead of stacking each one full-width down the
-  // page.
   if (firstHeadingIdx !== -1) {
     const rest = p.content.slice(firstHeadingIdx);
     const sections = [];
@@ -594,11 +581,7 @@ function openDetail(id) {
     });
     if (current) sections.push(current);
 
-    // Split sections into two independent columns (left gets sections
-    // 0, 2, 4…, right gets 1, 3, 5…) so each column stacks its own
-    // sections at their natural height instead of both columns being
-    // locked to shared grid row heights — see .pd-sections-grid in
-    // style.css for why that matters.
+
     const leftHtml = sections.filter((_, i) => i % 2 === 0)
       .map(sec => `<div class="pd-section">${renderRun(sec)}</div>`).join('');
     const rightHtml = sections.filter((_, i) => i % 2 === 1)
@@ -787,10 +770,6 @@ function initPacmanStrip(canvasId) {
     pacX   += step * dir;
     ghostX += step * dir;
 
-    // Classic tunnel wrap: pac-man keeps moving in the same direction and
-    // re-enters from the opposite edge, instead of turning around, so the
-    // animation reads as continuing past the navbar / page edge rather than
-    // stopping there.
     if (dir === 1 && pacX > W + R * 3) {
       pacX = -R * 3; ghostX = pacX - GR * 4;
       dots.forEach(d => d.eaten = false);
